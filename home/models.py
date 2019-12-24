@@ -146,19 +146,6 @@ class HomePage(Page):
     content_panels += [
         MultiFieldPanel(
             [
-                FieldPanel('about_us_header'),
-                FieldPanel('about_us_sub_header'),
-                FieldPanel('about_us_text'),
-                FieldPanel('about_us_button_text'),
-                FieldPanel('about_us_button_link'),
-                ImageChooserPanel('blurb_background')
-            ],
-            heading="blurb",  
-        ),
-    ]
-    content_panels += [
-        MultiFieldPanel(
-            [
                 FieldPanel('image_gallery_title'),
                 FieldPanel('image_gallery_text'),                
                 InlinePanel('galleryOrderable', label="Gallery")
