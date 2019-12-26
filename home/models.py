@@ -6,12 +6,35 @@ from modelcluster.fields import ParentalKey
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel,FieldRowPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
+
+
+class carouselOrderable(Orderable, models.Model):
+    page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='carouselOrderable')
+    
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    class Meta:
+        verbose_name = "carousel item"
+        verbose_name_plural = "carousel items"
+
+    panels = [
+         ImageChooserPanel('image')
+    ]
+
+    def __str__(self):
+        return self.page.title + " -> " + self.gallery.name
 
 
 class galleryOrderable(Orderable, models.Model):
@@ -39,8 +62,8 @@ class gallery(models.Model):
         related_name='+'
     )
     link = models.URLField(null=True, blank=True)
-    name = models.CharField(max_length=10)
-    description = models.CharField(max_length=10)
+    name = models.CharField(max_length=50)
+    description = models.CharField(max_length=50)
 
     panels = [
         ImageChooserPanel('image'),
@@ -75,6 +98,14 @@ class HomePage(Page):
 
     image_gallery_title = models.CharField(max_length=50, default="Gallery")  
     image_gallery_text = RichTextField(blank=True)
+
+    blurb2_header_1 = models.CharField(max_length=50, default="My Second Blurb")    
+    blurb2_header_2 = models.CharField(max_length=50, default="My Second Blurb 2")
+    blurb2_text = RichTextField(blank=True)
+
+    blurb2_buttonText = models.CharField(max_length=50, default="Find out more")
+    blurb2_link = models.CharField(max_length=50, default="#")
+    
     
     
     intro_background = models.ForeignKey(
@@ -91,8 +122,7 @@ class HomePage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
-    )
-    
+    )    
 
 
     content_panels = Page.content_panels + [
@@ -143,18 +173,31 @@ class HomePage(Page):
             heading="About Us",  
         ),
     ] 
+
     content_panels += [
         MultiFieldPanel(
             [
                 FieldPanel('image_gallery_title'),
                 FieldPanel('image_gallery_text'),                
-                InlinePanel('galleryOrderable', label="Gallery")
+                InlinePanel('galleryOrderable', label="Gallery Item")
             ],
             heading="Gallery",  
         ),
-    ]
+    ]   
 
-    
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('blurb2_header_1'),
+                FieldPanel('blurb2_header_2'),
+                FieldPanel('blurb2_text'),
+                InlinePanel('carouselOrderable', label="Carousel Item"),
+                FieldPanel('blurb2_buttonText'),
+                FieldPanel('blurb2_link'),
+            ],
+            heading="Second Blurb",  
+        ),
+    ]
 
     # promote_panels = [
     #     MultiFieldPanel(Page.promote_panels, "Common page configuration"),

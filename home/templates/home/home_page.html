@@ -98,18 +98,16 @@
       </div>  
     </div>
 
-    
+    {% if self.galleryOrderable.all  %}
      <section class="site-section border-bottom" id="team-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-5 text-left">
             <h2 class="section-title mb-3">{{page.image_gallery_title}}</h2>
-            <p class="lead">{{page.image_gallery_text}}</p>
+            <p class="lead">{{page.image_gallery_text|richtext}}</p>
           </div>
         </div>
         <div class="row">
-          
-
     
           {% for g in self.galleryOrderable.all %}
             <div class="col-md-6 col-lg-3 mb-4">
@@ -124,158 +122,33 @@
                   </div>
                 </div>
           {% endfor %}
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_6.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Dave Simpson</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_7.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Ben Thompson</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_8.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Kyla Stewart</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_1.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Kaiara Spencer</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_2.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Dave Simpson</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_3.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Ben Thompson</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_4.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Chris Stewart</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
 
     <section class="site-section">
       <div class="container">        
         <div class="row">
           <div class="col-lg-6">
+          {% if self.carouselOrderable.all  %}           
             <div class="owl-carousel slide-one-item-alt">
-              <img src="{% static 'images/slide_1.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_2.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_3.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_4.jpg'%}" alt="Image" class="img-fluid">
+              {% for g in self.carouselOrderable.all %}
+                {% image g.image original class="img-fluid" %} 
+              {% endfor %}             
             </div>
             <div class="custom-direction">
               <a href="#" class="custom-prev">Prev</a><a href="#" class="custom-next">Next</a>
             </div>
+            {% endif %}
           </div>
           <div class="col-lg-5 ml-auto">
             
-            <h2 class="section-title mb-3">We Are The Best Consulting Agency</h2>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-                <p>Est qui eos quasi ratione nostrum excepturi id recusandae fugit omnis ullam pariatur itaque nisi voluptas impedit  Quo suscipit omnis iste velit maxime.</p>
-
-                <p><a href="#" class="btn btn-primary mr-2 mb-2">Learn More</a></p>
+            <h2 class="section-title mb-3">{{page.blurb2_header_1}}</h2>
+                <p class="lead">{{blurb2_header_2}}</p>
+               {{page.blurb2_text|richtext}}
+                <p><a href="{{page.blurb2_link}}" class="btn btn-primary mr-2 mb-2">{{page.blurb2_buttonText}}</a></p>
             
           </div>
         </div>
