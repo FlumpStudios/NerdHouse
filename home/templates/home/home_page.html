@@ -103,30 +103,27 @@
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-5 text-left">
-            <h2 class="section-title mb-3">Our Dedicated <br> Professionals</h2>
-            <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus minima neque tempora reiciendis.</p>
+            <h2 class="section-title mb-3">{{page.image_gallery_title}}</h2>
+            <p class="lead">{{page.image_gallery_text}}</p>
           </div>
         </div>
         <div class="row">
           
 
-          <div class="col-md-6 col-lg-3 mb-4">
-            <div class="team-member">
-              <figure>
-                <ul class="social">
-                  <li><a href="#"><span class="icon-facebook"></span></a></li>
-                  <li><a href="#"><span class="icon-twitter"></span></a></li>
-                  <li><a href="#"><span class="icon-linkedin"></span></a></li>
-                  <li><a href="#"><span class="icon-instagram"></span></a></li>
-                </ul>
-                <img src="{% static 'images/person_5.jpg'%}" alt="Image" class="img-fluid">
-              </figure>
-              <div class="p-3">
-                <h3>Kaiara Spencer</h3>
-                <span class="position">Product Manager</span>
-              </div>
-            </div>
-          </div>
+    
+          {% for g in self.galleryOrderable.all %}
+            <div class="col-md-6 col-lg-3 mb-4">
+                  <div class="team-member">
+                    <figure>
+                      {% image g.gallery.image original class="img-fluid" %}
+                    </figure>
+                    <div class="p-3">
+                      <h3>{{g.gallery.name}}</h3>
+                      <span class="position"><a href="{{gallery.gallery.link}}">{{g.gallery.description}}</a></span>
+                    </div>
+                  </div>
+                </div>
+          {% endfor %}
 
           <div class="col-md-6 col-lg-3 mb-4">
             <div class="team-member">
