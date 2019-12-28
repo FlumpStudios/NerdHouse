@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Pointer &mdash; Website by Colorlib</title>
+    <title>{{page.client_organisationName}}</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -52,12 +52,32 @@
 
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
-                <li><a href="#about-section" class="nav-link">About Us</a></li>
-                <li><a href="#team-section" class="nav-link">Team</a></li>
-                <li><a href="#services-section" class="nav-link">Services</a></li>
-                <li><a href="#testimonials-section" class="nav-link">Testimonials</a></li>
+                 {% if page.show_blurb %}
+                <li><a href="#about-section" class="nav-link">{{page.blurb_header}}</a></li>
+                {% endif %}
+                {% if self.galleryOrderable.all %}
+                  <li><a href="#team-section" class="nav-link">{{page.image_gallery_title}}</a></li>
+                {% endif %}
+
+               {% if page.show_second_blurb %}
+                  <li><a href="#blurb-2-section" class="nav-link">{{page.second_blurb_header}}</a></li>
+                {% endif %}
+
+                {% if self.enumeratedListOrderable.all  %}
+                    <li><a href="#enumerated-section" class="nav-link">{{page.enumerated_list_header}}</a></li>
+                {% endif %}
+
+                {% if self.iconListOrderable.all %}
+                <li><a href="#services-section" class="nav-link">{{page.icon_list_header}}</a></li>
+                {% endif %}
+                {% if self.testimonialOrderable.all  %}
+                <li><a href="#testimonials-section" class="nav-link">{{page.testimonials_header}}</a></li>
+                {% endif %}
+                
                 <li><a href="#blog-section" class="nav-link">Blog</a></li>
+                {% if page.show_contact_form %}
                 <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                {% endif %}
               </ul>
             </nav>
           </div>
@@ -78,7 +98,7 @@
                 <h1>{{page.intro_header}}</h1>
                 <p class="mb-5">{{page.intro_text|richtext}}</p>
                 <div>
-                  <a href="#" class="btn btn-primary mr-2 mb-2">{{page.intro_continue_button_text}}</a>
+                  <a href="#about-section" class="btn btn-primary mr-2 mb-2 smoothscroll">{{page.intro_continue_button_text}}</a>
                 </div>
               </div>
             
@@ -86,20 +106,24 @@
       </div>
     </div>  
 
-    
-    <div class="site-section cta-big-image" id="about-section">
+    {% if page.show_blurb  %}
+    <div class="site-section cta-big-image border-bottom" id="about-section">
       <div class="container">
         {% image page.blurb_background original class="img-fluid" %}
         <div class="img-box">
-          <span class="sub-title">{{page.blurb_header_1}}</span>
-          <h2>{{page.blurb_header_2}}</h2>
+          <span class="sub-title">{{page.blurb_header}}</span>
+          <h2>{{page.blurb_subheader}}</h2>
           {{page.blurb_text|richtext}}          
         </div>
+          {% if page.blurb_link  %}   
+            <p><a href="{{page.blurb_link}}" class="btn btn-primary mr-2 mb-2">{{page.blurb_buttonText}}</a></p> 
+          {% endif %} 
       </div>  
     </div>
+     {% endif %}
 
     {% if self.galleryOrderable.all  %}
-     <section class="site-section border-bottom" id="team-section">
+     <section class="site-section border-bottom bg-light" id="team-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-5 text-left">
@@ -127,8 +151,8 @@
     </section>
     {% endif %}
 
-
-    <section class="site-section">
+ {% if page.show_second_blurb %}
+    <section class="site-section border-bottom" id="blurb-2-section">
       <div class="container">        
         <div class="row">
           <div class="col-lg-6">
@@ -143,250 +167,95 @@
             </div>
             {% endif %}
           </div>
-          <div class="col-lg-5 ml-auto">
-            
-            <h2 class="section-title mb-3">{{page.blurb2_header_1}}</h2>
-                <p class="lead">{{blurb2_header_2}}</p>
-               {{page.blurb2_text|richtext}}
-                <p><a href="{{page.blurb2_link}}" class="btn btn-primary mr-2 mb-2">{{page.blurb2_buttonText}}</a></p>
-            
+          <div class="col-lg-5 ml-auto">            
+            <h2 class="section-title mb-3">{{page.second_blurb_header}}</h2>
+                <p class="lead">{{page.second_blurb_subheader}}</p>
+               {{page.second_blurb_text|richtext}}
+                {% if page.second_blurb_link  %}   
+                  <p><a href="{{page.second_blurb_link}}" class="btn btn-primary mr-2 mb-2">{{page.second_blurb_buttonText}}</a></p> 
+                {% endif %}           
           </div>
         </div>
       </div>
     </section>
+    {% endif %}
 
-    <section class="site-section">
+{% if self.enumeratedListOrderable.all  %}
+    <section class="site-section border-bottom bg-light" id="enumerated-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12">
-            <h2 class="section-title mb-3">Our Approach</h2>
+            <h2 class="section-title mb-3">{{page.enumerated_list_header}}</h2>
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <div class=" box-with-humber">
-              <h2 class="text-black"><span class="text-primary">01.</span>Creative</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium eos nulla qui commodi consectetur beatae fugiat. Veniam iste rerum perferendis.</p>
-              
-            </div>
-          </div>
 
-          <div class="col-md-6 col-lg-4">
-            <div class=" box-with-humber">
-              <h2 class="text-black"><span class="text-primary">02.</span>Strategy</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium eos nulla qui commodi consectetur beatae fugiat. Veniam iste rerum perferendis.</p>
-              
+          {% for e in self.enumeratedListOrderable.all %}
+            <div class="col-md-6 col-lg-4">
+              <div class=" box-with-humber">
+                <h2 class="text-black"><span class="text-primary">{{ forloop.counter }}.</span>{{e.enumeratedList.title}}</h2>
+                <p class="mb-4">{{e.enumeratedList.text|richtext}}</p>              
+              </div>
             </div>
-          </div>
-
-          <div class="col-md-6 col-lg-4">
-            <div class=" box-with-humber">
-              <h2 class="text-black"><span class="text-primary">03.</span>Production</h2>
-              <p class="mb-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et praesentium eos nulla qui commodi consectetur beatae fugiat. Veniam iste rerum perferendis.</p>
-              
-            </div>
-          </div>
+          {%endfor%}
         </div>
       </div>
     </section>
+      {% endif %}
 
-    <section class="site-section border-bottom bg-light" id="services-section">
+
+{% if self.iconListOrderable.all  %}
+    <section class="site-section border-bottom border-bottom" id="services-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Our Services</h2>
+            <h2 class="section-title mb-3">{{page.icon_list_header}}</h2>
           </div>
         </div>
         <div class="row align-items-stretch">
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-autorenew"></span></div>
-              <div>
-                <h3>Great Design</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-backspace"></span></div>
-              <div>
-                <h3>Time Saving</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="200">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-av_timer"></span></div>
-              <div>
-                <h3>Quick Response</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
 
-
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="300">
+          {% for i in self.iconListOrderable.all %}          
+          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}">
             <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-beenhere"></span></div>
+              <div class="unit-4-icon mr-4"><span class="text-primary icon-{{i.iconItem.icon}}"></span></div>
               <div>
-                <h3>Best Support</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
+                <h3>{{i.iconItem.title}}</h3>
+                {{i.iconItem.text|richtext}}
+                <p><a href="{{i.iconItem.link}}">{{i.iconItem.linkText}}</a></p>
               </div>
             </div>
           </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="400">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-business_center"></span></div>
-              <div>
-                <h3>Finest Quality</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="500">
-            <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-cloud_done"></span></div>
-              <div>
-                <h3>Real Solutions</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis molestiae vitae eligendi at.</p>
-                <p><a href="#">Learn More</a></p>
-              </div>
-            </div>
-          </div>
-
+        {%endfor%}
         </div>
       </div>
     </section>
+    {% endif %}
 
-    <section class="site-section testimonial-wrap" id="testimonials-section">
+{% if self.testimonialOrderable.all  %}
+    <section class="site-section testimonial-wrap border-bottom bg-light" id="testimonials-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <h2 class="section-title mb-3">Testimonials</h2>
+            <h2 class="section-title mb-3">{{page.testimonials_header}}</h2>
           </div>
         </div>
       </div>
+
       <div class="slide-one-item home-slider owl-carousel">
+          {% for i in self.testimonialOrderable.all %}  
           <div>
-            <div class="testimonial">
-              
+            <div class="testimonial">              
               <blockquote class="mb-5">
-                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
+                {{i.testimonialItem.testimonial|richtext}}
               </blockquote>
 
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="{% static 'images/person_3.jpg'%}" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>John Smith</p>
-              </figure>
+                <p>{{i.testimonialItem.author}}</p>              
             </div>
           </div>
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="{% static 'images/person_2.jpg'%}" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Christine Aguilar</p>
-              </figure>
-              
-            </div>
-          </div>
-
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="{% static 'images/person_4.jpg'%}" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Robert Spears</p>
-              </figure>
-
-              
-            </div>
-          </div>
-
-          <div>
-            <div class="testimonial">
-
-              <blockquote class="mb-5">
-                <p>&ldquo;Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur unde reprehenderit aperiam quaerat fugiat repudiandae explicabo animi minima fuga beatae illum eligendi incidunt consequatur. Amet dolores excepturi earum unde iusto.&rdquo;</p>
-              </blockquote>
-              <figure class="mb-4 d-flex align-items-center justify-content-center">
-                <div><img src="{% static 'images/person_4.jpg'%}" alt="Image" class="w-50 img-fluid mb-3"></div>
-                <p>Bruce Rogers</p>
-              </figure>
-
-            </div>
-          </div>
-
-        </div>
+           {% endfor %}
+          </div> 
     </section>
-
-    <section class="site-section" id="about-section">
-      <div class="container">
-        <div class="row mb-5">
-          
-          <div class="col-md-5 ml-auto mb-5 order-md-2" data-aos="fade">
-            
-
-            <div class="owl-carousel slide-one-item-alt">
-              <img src="{% static 'images/slide_1.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_2.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_3.jpg'%}" alt="Image" class="img-fluid">
-              <img src="{% static 'images/slide_4.jpg'%}" alt="Image" class="img-fluid">
-            </div>
-            <div class="custom-direction">
-              <a href="#" class="custom-prev">Prev</a><a href="#" class="custom-next">Next</a>
-            </div>
-          </div>
-          <div class="col-md-6 order-md-1" data-aos="fade">
-
-            <div class="row">
-
-              
-              <div class="col-12 mb-4">
-                <h2 class="section-title mb-3">Consulting Agency It's Best</h2>
-              </div>
-              <div class="col-md-12 mb-md-5 mb-0 col-lg-6">
-                <div class="unit-4">
-                  <div class="unit-4-icon mr-4 mb-3"><span class="text-primary icon-adb"></span></div>
-                  <div>
-                    <h3>Web &amp; Mobile Specialties</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis consect.</p>
-                    <p class="mb-0"><a href="#">Learn More</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-12 mb-md-5 mb-0 col-lg-6">
-                <div class="unit-4">
-                  <div class="unit-4-icon mr-4 mb-3"><span class="text-primary icon-assignment"></span></div>
-                  <div>
-                    <h3>Intuitive Thinkers</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis quis.</p>
-                    <p class="mb-0"><a href="#">Learn More</a></p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          
-        </div>
-      </div>
-    </section>
-  
-    
-    
+  {% endif %}
 
     <section class="site-section" id="blog-section">
       <div class="container">
@@ -429,24 +298,23 @@
       </div>
     </section>
 
+{% if page.show_contact_form  %}
     <section class="site-section bg-light" id="contact-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <h3 class="section-sub-title">Services</h3>
-            <h2 class="section-title mb-3">Our Services</h2>
+            <h3 class="section-sub-title">{{page.contact_title}}</h3>
+            <h2 class="section-title mb-3">{{page.contact_subtitle}}</h2>
           </div>
         </div>
         <div class="row">
           <div class="col-md-7 mb-5">
             <form action="#" class="p-5 bg-white">              
-              <h2 class="h4 text-black mb-5">Contact Form</h2> 
-
               <div class="row form-group">
                 <div class="col-md-6 mb-3 mb-md-0">
                   <label class="text-black" for="fname">First Name</label>
                   <input type="text" id="fname" class="form-control">
-                </div>
+                </div>  
                 <div class="col-md-6">
                   <label class="text-black" for="lname">Last Name</label>
                   <input type="text" id="lname" class="form-control">
@@ -487,21 +355,56 @@
             
             <div class="p-4 mb-3 bg-white">
               <p class="mb-0 font-weight-bold">Address</p>
-              <p class="mb-4">203 Fake St. Mountain View, San Francisco, California, USA</p>
+              <p class="mb-4">
+              {{page.client_addressLine1}}
+              {% if page.client_addressLine1  %}
+              ,
+              {% endif %}
+              
+              {{page.client_addressLine2}}
+              {% if page.client_addressLine2  %}
+              ,
+              {% endif %}
 
+              {{page.client_town}}
+              {% if page.client_town  %}
+              ,
+              {% endif %}
+
+              {{page.client_county}}
+              {% if page.client_county  %}
+              ,
+              {% endif %}
+
+              {{page.client_country}}
+              {% if page.client_country  %}
+              ,
+              {% endif %}
+
+              {{page.client_postcode}}              
+              </p>
+
+              {% if page.client_phone  %}
               <p class="mb-0 font-weight-bold">Phone</p>
-              <p class="mb-4"><a href="#">+1 232 3235 324</a></p>
+              <p class="mb-4"><a href="#">{{page.client_phone}}</a></p>
+              {% endif %}
 
+              {% if page.client_moblie  %}
+              <p class="mb-0 font-weight-bold">Mobile</p>
+              <p class="mb-4"><a href="#">{{page.client_moblie}}</a></p>
+              {% endif %}
+
+              {% if page.client_email  %}
               <p class="mb-0 font-weight-bold">Email Address</p>
-              <p class="mb-0"><a href="#">youremail@domain.com</a></p>
-
+              <p class="mb-0"><a href="#">{{page.client_email}}</a></p>
+              {% endif %}
             </div>
             
           </div>
         </div>
       </div>
     </section>
-
+ {% endif %}
     
     <footer class="site-footer">
       <div class="container">
@@ -509,33 +412,22 @@
           <div class="col-md-8">
             <div class="row">
               <div class="col-md-5">
-                <h2 class="footer-heading mb-4">About Us</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque facere laudantium magnam voluptatum autem. Amet aliquid nesciunt veritatis aliquam.</p>
+                <h2 class="footer-heading mb-4">{{page.footer_info_title}}</h2>
+               {{page.footer_info}}
               </div>
               <div class="col-md-3 ml-auto">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
-                  <li><a href="#">About Us</a></li>
-                  <li><a href="#">Services</a></li>
-                  <li><a href="#">Testimonials</a></li>
-                  <li><a href="#">Contact Us</a></li>
+                  <li><a href="#about-section" class="smoothscroll" >About Us</a></li>
+                  <li><a href="#services-section" class="smoothscroll">Services</a></li>
+                  <li><a href="#testimonials-section" class="smoothscroll">Testimonials</a></li>
+                  <li><a href="#contact-section" class="smoothscroll">Contact Us</a></li>
                 </ul>
-              </div>
-              
+              </div>              
             </div>
           </div>
           <div class="col-md-4">
-            <div class="mb-4">
-              <h2 class="footer-heading mb-4">Subscribe Newsletter</h2>
-            <form action="#" method="post" class="footer-subscribe">
-              <div class="input-group mb-3">
-                <input type="text" class="form-control border-secondary text-white bg-transparent" placeholder="Enter Email" aria-label="Enter Email" aria-describedby="button-addon2">
-                <div class="input-group-append">
-                  <button class="btn btn-primary text-black" type="button" id="button-addon2">Send</button>
-                </div>
-              </div>
-            </form>  
-            </div>
+       
             
             <div class="">
               <h2 class="footer-heading mb-4">Follow Us</h2>

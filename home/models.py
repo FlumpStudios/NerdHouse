@@ -52,6 +52,52 @@ class galleryOrderable(Orderable, models.Model):
     def __str__(self):
         return self.page.title + " -> " + self.gallery.name
 
+
+class enumeratedListOrderable(Orderable, models.Model):
+    page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='enumeratedListOrderable')
+    enumeratedList = models.ForeignKey('enumeratedList', on_delete=models.CASCADE, related_name='+')
+
+    class Meta:
+        verbose_name = "Enumerated List item"
+        verbose_name_plural = "Enumerated List items"
+
+    panels = [
+        SnippetChooserPanel('enumeratedList'),
+    ]
+
+    def __str__(self):
+        return self.page.title + " -> " + self.gallery.name
+
+class iconListOrderable(Orderable, models.Model):
+    page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='iconListOrderable')
+    iconItem = models.ForeignKey('iconItem', on_delete=models.CASCADE, related_name='+')
+
+    class Meta:
+        verbose_name = "Icon List item"
+        verbose_name_plural = "Icon List items"
+
+    panels = [
+        SnippetChooserPanel('iconItem'),
+    ]
+
+    def __str__(self):
+        return self.page.title + " -> " + self.gallery.name
+
+class testimonialOrderable(Orderable, models.Model):
+    page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='testimonialOrderable')
+    testimonialItem = models.ForeignKey('testimonialItem', on_delete=models.CASCADE, related_name='+')
+
+    class Meta:
+        verbose_name = "Testimonial List item"
+        verbose_name_plural = "Testimonial List items"
+
+    panels = [
+        SnippetChooserPanel('testimonialItem'),
+    ]
+
+    def __str__(self):
+        return self.page.title + " -> " + self.gallery.name
+
 @register_snippet
 class gallery(models.Model):
     image = models.ForeignKey(
@@ -75,6 +121,60 @@ class gallery(models.Model):
     def __str__(self):
         return self.name
 
+
+@register_snippet
+class enumeratedList(models.Model):    
+    title = models.CharField(max_length=50)
+    text = RichTextField(blank=True)    
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('text')        
+    ]
+
+    def __str__(self):
+        return self.title
+
+
+@register_snippet
+class iconItem(models.Model):    
+    title = models.CharField(max_length=50)        
+    icon = models.CharField(max_length=50)
+    text = RichTextField(blank=True)        
+    linkText = models.CharField(max_length=50)
+    link = models.URLField(null=True, blank=True)
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('icon'),
+        FieldPanel('text'),
+        FieldPanel('linkText'),                
+        FieldPanel('link')
+    ]
+
+    def __str__(self):
+        return self.title
+
+@register_snippet
+class testimonialItem(models.Model):
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    author = models.CharField(max_length=50)
+    testimonial = RichTextField(blank=True)
+    
+    panels = [
+        FieldPanel('author'),
+        FieldPanel('testimonial')
+    ]
+
+    def __str__(self):
+        return self.author
+
 class HomePage(Page):
     #DATABASE FIELDS
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")
@@ -84,28 +184,48 @@ class HomePage(Page):
     
     client_firstname = models.CharField(max_length=50, default="Joe")    
     client_surname = models.CharField(max_length=50, default="Blogs")    
-    client_organisationName = models.CharField(max_length=50, default="Nerdhouse", null=True)
+    client_organisationName = models.CharField(max_length=50, default="My Company", null=True)
+    client_addressLine1 = models.CharField(max_length=50, default="Line 1", null=True)
+    client_addressLine2 = models.CharField(max_length=50, default="Line 2", null=True)
+    client_town = models.CharField(max_length=50, default="Town", null=True)
+    client_county = models.CharField(max_length=50, default="County", null=True)
+    client_country = models.CharField(max_length=50, default="Country", null=True)
+    client_postcode = models.CharField(max_length=50, default="XX00 0XX ", null=True)
+    client_email = models.CharField(max_length=50, default="joe@bloggs.com", null=True)
+    client_phone = models.CharField(max_length=50, default="01234 456789", null=True)
+    client_moblie = models.CharField(max_length=50, default="01234 456789", null=True)
     
-    blurb_header_1 = models.CharField(max_length=50, default="My Blurb")    
-    blurb_header_2 = models.CharField(max_length=50, default="My Blurb 2")
-    blurb_text = RichTextField(blank=True)
-
-    about_us_header = models.CharField(max_length=50, default="About Us")    
-    about_us_sub_header = models.CharField(max_length=50, default="stuff about us")
-    about_us_text = RichTextField(blank=True)
-    about_us_button_text = models.CharField(max_length=50, default="Learn More")    
-    about_us_button_link = models.CharField(max_length=50, default="#")    
+    
+    blurb_header = models.CharField(max_length=50, default="Blurb")    
+    blurb_subheader = models.CharField(max_length=50, default="this is a blurb ")
+    blurb_text = RichTextField(blank=True)        
+    blurb_buttonText = models.CharField(max_length=50, default="Find out more")
+    blurb_link = models.URLField(null=True, blank=True)
+    show_blurb = models.BooleanField(default=True)
 
     image_gallery_title = models.CharField(max_length=50, default="Gallery")  
     image_gallery_text = RichTextField(blank=True)
 
-    blurb2_header_1 = models.CharField(max_length=50, default="My Second Blurb")    
-    blurb2_header_2 = models.CharField(max_length=50, default="My Second Blurb 2")
-    blurb2_text = RichTextField(blank=True)
+    second_blurb_header = models.CharField(max_length=50, default="Blurb 2")    
+    second_blurb_subheader = models.CharField(max_length=50, default="My Second Blurb 2")
+    second_blurb_text = RichTextField(blank=True)
+    show_second_blurb = models.BooleanField(default=True)
 
-    blurb2_buttonText = models.CharField(max_length=50, default="Find out more")
-    blurb2_link = models.CharField(max_length=50, default="#")
+    second_blurb_buttonText = models.CharField(max_length=50, default="Find out more")
+    second_blurb_link = models.URLField(null=True, blank=True)
+ 
+    enumerated_list_header = models.CharField(max_length=50, default="Approach")    
+
+    icon_list_header = models.CharField(max_length=50, default="Services")    
     
+    testimonials_header = models.CharField(max_length=50, default="Testimonials")    
+
+    contact_title = models.CharField(max_length=50, default="Contact")        
+    contact_subtitle = models.CharField(max_length=50, default="Get in contact")    
+    show_contact_form = models.BooleanField(default=True)
+
+    footer_info_title = models.CharField(max_length=50, default="About") 
+    footer_info = RichTextField(blank=True)      
     
     
     intro_background = models.ForeignKey(
@@ -122,17 +242,25 @@ class HomePage(Page):
         blank=True,
         on_delete=models.SET_NULL,
         related_name='+'
-    )    
-
+    )
 
     content_panels = Page.content_panels + [
         MultiFieldPanel(
             [
                 FieldPanel('client_firstname'),
                 FieldPanel('client_surname'),
-                FieldPanel('client_organisationName'),         
+                FieldPanel('client_organisationName'), 
+                FieldPanel('client_addressLine1'),  
+                FieldPanel('client_addressLine2'),  
+                FieldPanel('client_town'),  
+                FieldPanel('client_county'),  
+                FieldPanel('client_country'),  
+                FieldPanel('client_postcode'),  
+                FieldPanel('client_email'),          
+                FieldPanel('client_phone'),
+                FieldPanel('client_moblie')
             ],
-            heading="Client Information",  
+            heading="Personal Information",  
         ),
     ]
 
@@ -151,28 +279,17 @@ class HomePage(Page):
     content_panels += [
         MultiFieldPanel(
             [
-                FieldPanel('blurb_header_1'),
-                FieldPanel('blurb_header_2'),
+                FieldPanel('blurb_header'),
+                FieldPanel('blurb_subheader'),
                 FieldPanel('blurb_text'),
-                ImageChooserPanel('blurb_background')
+                ImageChooserPanel('blurb_background'),
+                FieldPanel('blurb_buttonText'),
+                FieldPanel('blurb_link'),
+                FieldPanel('show_blurb')
             ],
             heading="Blurb",  
         ),
-    ]
-
-    content_panels += [
-        MultiFieldPanel(
-            [
-                FieldPanel('about_us_header'),
-                FieldPanel('about_us_sub_header'),
-                FieldPanel('about_us_text'),
-                FieldPanel('about_us_button_text'),
-                FieldPanel('about_us_button_link'),
-                ImageChooserPanel('blurb_background')
-            ],
-            heading="About Us",  
-        ),
-    ] 
+    ]    
 
     content_panels += [
         MultiFieldPanel(
@@ -188,14 +305,66 @@ class HomePage(Page):
     content_panels += [
         MultiFieldPanel(
             [
-                FieldPanel('blurb2_header_1'),
-                FieldPanel('blurb2_header_2'),
-                FieldPanel('blurb2_text'),
-                InlinePanel('carouselOrderable', label="Carousel Item"),
-                FieldPanel('blurb2_buttonText'),
-                FieldPanel('blurb2_link'),
+                FieldPanel('second_blurb_header'),
+                FieldPanel('second_blurb_subheader'),
+                FieldPanel('second_blurb_text'),
+                InlinePanel('carouselOrderable', label="Carousel Image"),
+                FieldPanel('second_blurb_buttonText'),
+                FieldPanel('second_blurb_link'),
+                FieldPanel('show_second_blurb')
             ],
             heading="Second Blurb",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('enumerated_list_header'),                
+                InlinePanel('enumeratedListOrderable', label="Enumerated List Item")
+            ],
+            heading="Enumerated List",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('icon_list_header'),                
+                InlinePanel('iconListOrderable', label="Icon List Item")
+            ],
+            heading="Icon List",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('testimonials_header'),                
+                InlinePanel('testimonialOrderable', label="Testimonial Item")
+            ],
+            heading="Icon List",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('contact_title'),                
+                FieldPanel('contact_subtitle'),
+                FieldPanel('show_contact_form')
+            ],
+            heading="Contact Form",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('footer_info_title'),                
+                FieldPanel('footer_info')
+            ],
+            heading="Footer",  
         ),
     ]
 
