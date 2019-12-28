@@ -419,10 +419,33 @@
               <div class="col-md-3 ml-auto">
                 <h2 class="footer-heading mb-4">Quick Links</h2>
                 <ul class="list-unstyled">
-                  <li><a href="#about-section" class="smoothscroll" >About Us</a></li>
-                  <li><a href="#services-section" class="smoothscroll">Services</a></li>
-                  <li><a href="#testimonials-section" class="smoothscroll">Testimonials</a></li>
-                  <li><a href="#contact-section" class="smoothscroll">Contact Us</a></li>
+                {% if page.show_blurb %}
+                <li><a href="#{{page.blurb_header|cut:" "}}" class="smoothscroll">{{page.blurb_header}}</a></li>
+                {% endif %}
+                {% if self.galleryOrderable.all %}
+                  <li><a href="#{{page.image_gallery_title|cut:" "}}" class="smoothscroll">{{page.image_gallery_title}}</a></li>
+                {% endif %}
+
+               {% if page.show_second_blurb %}
+                  <li><a href="#{{page.second_blurb_header|cut:" "}}" class="smoothscroll">{{page.second_blurb_header}}</a></li>
+                {% endif %}
+
+                {% if self.enumeratedListOrderable.all  %}
+                    <li><a href="#{{page.enumerated_list_header|cut:" "}}" class="smoothscroll">{{page.enumerated_list_header}}</a></li>
+                {% endif %}
+
+                {% if self.iconListOrderable.all %}
+                <li><a href="#{{page.icon_list_header|cut:" "}}" class="smoothscroll">{{page.icon_list_header}}</a></li>
+                {% endif %}
+                {% if self.testimonialOrderable.all  %}
+                <li><a href="#{{page.testimonials_header|cut:" "}}" class="smoothscroll">{{page.testimonials_header}}</a></li>
+                {% endif %}
+                
+                <li><a href="#blog-section" class="smoothscroll">Blog</a></li>
+
+                {% if page.show_contact_form %}
+                <li><a href="#{{page.contact_title|cut:" "}}" class="smoothscroll">{{page.contact_title}}</a></li>
+                {% endif %}
                 </ul>
               </div>              
             </div>
