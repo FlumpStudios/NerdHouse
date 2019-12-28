@@ -53,30 +53,31 @@
               <ul class="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li><a href="#home-section" class="nav-link">Home</a></li>
                  {% if page.show_blurb %}
-                <li><a href="#about-section" class="nav-link">{{page.blurb_header}}</a></li>
+                <li><a href="#{{page.blurb_header|cut:" "}}" class="nav-link">{{page.blurb_header}}</a></li>
                 {% endif %}
                 {% if self.galleryOrderable.all %}
-                  <li><a href="#team-section" class="nav-link">{{page.image_gallery_title}}</a></li>
+                  <li><a href="#{{page.image_gallery_title|cut:" "}}" class="nav-link">{{page.image_gallery_title}}</a></li>
                 {% endif %}
 
                {% if page.show_second_blurb %}
-                  <li><a href="#blurb-2-section" class="nav-link">{{page.second_blurb_header}}</a></li>
+                  <li><a href="#{{page.second_blurb_header|cut:" "}}" class="nav-link">{{page.second_blurb_header}}</a></li>
                 {% endif %}
 
                 {% if self.enumeratedListOrderable.all  %}
-                    <li><a href="#enumerated-section" class="nav-link">{{page.enumerated_list_header}}</a></li>
+                    <li><a href="#{{page.enumerated_list_header|cut:" "}}" class="nav-link">{{page.enumerated_list_header}}</a></li>
                 {% endif %}
 
                 {% if self.iconListOrderable.all %}
-                <li><a href="#services-section" class="nav-link">{{page.icon_list_header}}</a></li>
+                <li><a href="#{{page.icon_list_header|cut:" "}}" class="nav-link">{{page.icon_list_header}}</a></li>
                 {% endif %}
                 {% if self.testimonialOrderable.all  %}
-                <li><a href="#testimonials-section" class="nav-link">{{page.testimonials_header}}</a></li>
+                <li><a href="#{{page.testimonials_header|cut:" "}}" class="nav-link">{{page.testimonials_header}}</a></li>
                 {% endif %}
                 
                 <li><a href="#blog-section" class="nav-link">Blog</a></li>
+
                 {% if page.show_contact_form %}
-                <li><a href="#contact-section" class="nav-link">Contact</a></li>
+                <li><a href="#{{page.contact_title|cut:" "}}" class="nav-link">{{page.contact_title}}</a></li>
                 {% endif %}
               </ul>
             </nav>
@@ -98,7 +99,7 @@
                 <h1>{{page.intro_header}}</h1>
                 <p class="mb-5">{{page.intro_text|richtext}}</p>
                 <div>
-                  <a href="#about-section" class="btn btn-primary mr-2 mb-2 smoothscroll">{{page.intro_continue_button_text}}</a>
+                  <a href="#{{page.blurb_header|cut:" "}}" class="btn btn-primary mr-2 mb-2 smoothscroll">{{page.intro_continue_button_text}}</a>
                 </div>
               </div>
             
@@ -107,7 +108,7 @@
     </div>  
 
     {% if page.show_blurb  %}
-    <div class="site-section cta-big-image border-bottom" id="about-section">
+    <div class="site-section cta-big-image border-bottom" id="{{page.blurb_header|cut:" "}}">
       <div class="container">
         {% image page.blurb_background original class="img-fluid" %}
         <div class="img-box">
@@ -123,7 +124,7 @@
      {% endif %}
 
     {% if self.galleryOrderable.all  %}
-     <section class="site-section border-bottom bg-light" id="team-section">
+     <section class="site-section border-bottom bg-light" id="{{page.image_gallery_title|cut:" "}}">
       <div class="container">
         <div class="row mb-5">
           <div class="col-md-5 text-left">
@@ -152,7 +153,7 @@
     {% endif %}
 
  {% if page.show_second_blurb %}
-    <section class="site-section border-bottom" id="blurb-2-section">
+    <section class="site-section border-bottom" id="{{page.second_blurb_header|cut:" "}}">
       <div class="container">        
         <div class="row">
           <div class="col-lg-6">
@@ -181,7 +182,7 @@
     {% endif %}
 
 {% if self.enumeratedListOrderable.all  %}
-    <section class="site-section border-bottom bg-light" id="enumerated-section">
+    <section class="site-section border-bottom bg-light" id="{{page.enumerated_list_header|cut:" "}}">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12">
@@ -205,7 +206,7 @@
 
 
 {% if self.iconListOrderable.all  %}
-    <section class="site-section border-bottom border-bottom" id="services-section">
+    <section class="site-section border-bottom border-bottom" id="{{page.icon_list_header|cut:" "}}">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -232,7 +233,7 @@
     {% endif %}
 
 {% if self.testimonialOrderable.all  %}
-    <section class="site-section testimonial-wrap border-bottom bg-light" id="testimonials-section">
+    <section class="site-section testimonial-wrap border-bottom bg-light" id="{{page.testimonials_header|cut:" "}}">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -299,7 +300,7 @@
     </section>
 
 {% if page.show_contact_form  %}
-    <section class="site-section bg-light" id="contact-section">
+    <section class="site-section bg-light" id="{{page.contact_title|cut:" "}}">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
