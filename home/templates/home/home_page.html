@@ -77,13 +77,13 @@ h1, h2, h3, h4, h5,
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
   .btn.btn-primary {
-    background: #e81050;
-    border-color: #e81050;
+    background: {{page.primary_colour}};
+    border-color: {{page.primary_colour}};
     color: #fff; }
     .btn.btn-primary:hover {
       background: #fff;
       border-color: #fff;
-      color: #e81050; }
+      color: {{page.primary_colour}}; }
     .btn.btn-primary.btn-black--hover:hover {
       background: #666666;
       color: #fff; }
@@ -99,7 +99,7 @@ h1, h2, h3, h4, h5,
   border-radius: 30px;
   font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; }
   .form-control:active, .form-control:focus {
-    border-color: #e81050; }
+    border-color: {{page.primary_colour}}; }
   .form-control:hover, .form-control:active, .form-control:focus {
     -webkit-box-shadow: none !important;
     box-shadow: none !important; }
@@ -253,7 +253,7 @@ h1, h2, h3, h4, h5,
   .ul-check.success li:before {
     color: #8bc34a; }
   .ul-check.primary li:before {
-    color: #e81050; }
+    color: {{page.primary_colour}}; }
 
 .select-wrap, .wrap-icon {
   position: relative; }
@@ -288,7 +288,7 @@ h1, h2, h3, h4, h5,
   .site-navbar .site-navigation .site-menu {
     margin-bottom: 0; }
     .site-navbar .site-navigation .site-menu .active {
-      color: #e81050;
+      color: {{page.primary_colour}};
       display: inline-block;
       padding: 5px 20px; }
     .site-navbar .site-navigation .site-menu a {
@@ -302,7 +302,7 @@ h1, h2, h3, h4, h5,
         display: inline-block;
         text-decoration: none !important; }
         .site-navbar .site-navigation .site-menu > li > a:hover {
-          color: #e81050; }
+          color: {{page.primary_colour}}; }
     .site-navbar .site-navigation .site-menu .has-children {
       position: relative; }
       .site-navbar .site-navigation .site-menu .has-children > a {
@@ -324,7 +324,7 @@ h1, h2, h3, h4, h5,
         top: 100%;
         position: absolute;
         text-align: left;
-        border-top: 2px solid #e81050;
+        border-top: 2px solid {{page.primary_colour}};
         -webkit-box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.1);
         box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.1);
         border-left: 1px solid #edf0f5;
@@ -361,7 +361,7 @@ h1, h2, h3, h4, h5,
           transition: 0s all;
           color: #343a40; }
         .site-navbar .site-navigation .site-menu .has-children .dropdown .active > a {
-          color: #e81050 !important; }
+          color: {{page.primary_colour}} !important; }
         .site-navbar .site-navigation .site-menu .has-children .dropdown > li {
           list-style: none;
           padding: 0;
@@ -383,7 +383,7 @@ h1, h2, h3, h4, h5,
             background: #f4f5f9;
             color: #25262a; }
       .site-navbar .site-navigation .site-menu .has-children:hover > a, .site-navbar .site-navigation .site-menu .has-children:focus > a, .site-navbar .site-navigation .site-menu .has-children:active > a {
-        color: #e81050; }
+        color: {{page.primary_colour}}; }
       .site-navbar .site-navigation .site-menu .has-children:hover, .site-navbar .site-navigation .site-menu .has-children:focus, .site-navbar .site-navigation .site-menu .has-children:active {
         cursor: pointer; }
         .site-navbar .site-navigation .site-menu .has-children:hover > .dropdown, .site-navbar .site-navigation .site-menu .has-children:focus > .dropdown, .site-navbar .site-navigation .site-menu .has-children:active > .dropdown {
@@ -463,12 +463,12 @@ h1, h2, h3, h4, h5,
       position: relative;
       color: #212529; }
       .site-mobile-menu .site-nav-wrap a:hover {
-        color: #e81050; }
+        color: {{page.primary_colour}}; }
     .site-mobile-menu .site-nav-wrap li {
       position: relative;
       display: block; }
       .site-mobile-menu .site-nav-wrap li .active {
-        color: #e81050; }
+        color: {{page.primary_colour}}; }
     .site-mobile-menu .site-nav-wrap .arrow-collapse {
       position: absolute;
       right: 0px;
@@ -556,11 +556,11 @@ h1, h2, h3, h4, h5,
     -webkit-box-shadow: 4px 0 20px -5px rgba(0, 0, 0, 0.2);
     box-shadow: 4px 0 20px -5px rgba(0, 0, 0, 0.2); }
     .sticky-wrapper.is-sticky .site-navbar .site-logo a {
-      color: #e81050; }
+      color: {{page.primary_colour}}; }
     .sticky-wrapper.is-sticky .site-navbar ul li a {
       color: #000 !important; }
       .sticky-wrapper.is-sticky .site-navbar ul li a.active {
-        color: #e81050 !important; }
+        color: {{page.primary_colour}} !important; }
   .sticky-wrapper .shrink {
     padding-top: 10px !important;
     padding-bottom: 10px !important; }
@@ -734,7 +734,7 @@ h1, h2, h3, h4, h5,
     font-weight: bold;
     color: #cccccc; }
     .site-block-tab .nav-item > a:hover, .site-block-tab .nav-item > a.active {
-      border-bottom: 2px solid #e81050;
+      border-bottom: 2px solid  {{page.primary_colour}};
       color: #000; }
 
 .block-13, .slide-one-item {
@@ -820,7 +820,7 @@ h1, h2, h3, h4, h5,
       border-radius: 50%;
       background: #dee2e6; }
     .slide-one-item .owl-dots .owl-dot.active span {
-      background: #e81050; }
+      background:  {{page.primary_colour}}; }
 
 .block-12 {
   position: relative; }
@@ -875,7 +875,7 @@ h1, h2, h3, h4, h5,
         width: 80px;
         height: 4px;
         margin-top: -4px;
-        background: #e81050;
+        background:  {{page.primary_colour}};
         top: 0; }
       .block-12 .text .text-inner .heading {
         font-size: 20px;
@@ -898,7 +898,7 @@ h1, h2, h3, h4, h5,
     display: block;
     border-radius: 50%;
     opacity: 1;
-    color: #e81050 !important; }
+    color:  {{page.primary_colour}} !important; }
     .block-16 figure .play-button:hover {
       opacity: 1; }
     .block-16 figure .play-button > span {
@@ -936,7 +936,7 @@ h1, h2, h3, h4, h5,
   color: #999999; }
 
 .block-25 ul li a .meta {
-  color: #e81050; }
+  color:  {{page.primary_colour}}; }
 
 .block-25 ul li a:hover img {
   opacity: .5; }
@@ -965,7 +965,7 @@ h1, h2, h3, h4, h5,
     position: absolute;
     width: 30px;
     height: 30px;
-    background: #e81050;
+    background:  {{page.primary_colour}};
     border-radius: 50%;
     color: #fff; }
     .player .team-number > span {
@@ -1000,7 +1000,7 @@ h1, h2, h3, h4, h5,
     border-radius: 50%;
     border: 1px solid #ccc; }
   .site-block-27 ul li.active a, .site-block-27 ul li.active span {
-    background: #e81050;
+    background:  {{page.primary_colour}};
     color: #fff;
     border: 1px solid transparent; }
 
@@ -1105,7 +1105,7 @@ h1, h2, h3, h4, h5,
   margin-top: -100px; }
 
 .feature-1, .free-quote, .feature-3 {
-  background: #e81050;
+  background:  {{page.primary_colour}};
   padding: 30px 50px;
   color: rgba(255, 255, 255, 0.6);
   font-size: 15px; }
@@ -1173,7 +1173,7 @@ h1, h2, h3, h4, h5,
     bottom: 0;
     width: 80px;
     height: 3px;
-    background: #e81050; }
+    background:  {{page.primary_colour}}; }
   .border-primary.text-center:after {
     left: 50%;
     -webkit-transform: translateX(-50%);
@@ -1207,7 +1207,7 @@ h1, h2, h3, h4, h5,
 .how-it-work-item .number {
   width: 50px;
   height: 50px;
-  background: #e81050;
+  background:  {{page.primary_colour}};
   color: #fff;
   line-height: 55px;
   font-weight: 300;
@@ -1262,7 +1262,7 @@ h1, h2, h3, h4, h5,
   line-height: 40px;
   border-radius: 50%;
   display: inline-block;
-  background: #e81050;
+  background:  {{page.primary_colour}};
   color: #fff; }
 
 .custom-pagination span {
@@ -1321,7 +1321,7 @@ h1, h2, h3, h4, h5,
     -o-transition: .1s all ease;
     transition: .1s all ease; }
   .popular-category:hover {
-    background: #e81050;
+    background:  {{page.primary_colour}};
     -webkit-box-shadow: 0 5px 30px -5px rgba(232, 16, 80, 0.5);
     box-shadow: 0 5px 30px -5px rgba(232, 16, 80, 0.5); }
     .popular-category:hover .caption {
@@ -1372,7 +1372,7 @@ h1, h2, h3, h4, h5,
       font-size: 12px;
       display: inline-block;
       padding: 5px 30px;
-      background: #e81050;
+      background:  {{page.primary_colour}};
       border-radius: 30px;
       color: #fff;
       letter-spacing: .2em;
@@ -1405,12 +1405,12 @@ h1, h2, h3, h4, h5,
       -ms-transform: translate(-50%, -50%);
       transform: translate(-50%, -50%); }
     .listing-item .bookmark:hover {
-      background: #e81050; }
+      background:  {{page.primary_colour}}; }
       .listing-item .bookmark:hover span {
         color: #fff; }
 
 .accordion-item[aria-expanded="true"] {
-  color: #e81050; }
+  color:  {{page.primary_colour}}; }
 
 .social-media {
   display: inline-block;
@@ -1443,7 +1443,7 @@ h1, h2, h3, h4, h5,
     display: inline-block;
     width: 50px;
     height: 50px;
-    background: #e81050;
+    background:  {{page.primary_colour}};
     margin-right: 1.5rem;
     border-radius: 50%;
     line-height: 50px;
@@ -1556,12 +1556,12 @@ h1, h2, h3, h4, h5,
 
 .section-sub-title {
   font-size: 13px;
-  color: #e81050;
+  color:  {{page.primary_colour}};
   letter-spacing: .2em;
   text-transform: uppercase; }
 
 .section-title {
-  color: #e81050;
+  color:  {{page.primary_colour}};
   font-size: 40px;
   font-weight: 900; }
   @media (max-width: 991.98px) {
@@ -1603,7 +1603,7 @@ h1, h2, h3, h4, h5,
   position: relative; }
 
 .cta-big-image .img-box {
-  background: #e81050;
+  background:  {{page.primary_colour}};
   max-width: 550px;
   padding: 3rem;
   position: absolute;
@@ -1655,7 +1655,7 @@ h1, h2, h3, h4, h5,
     -webkit-transition: .3s all ease;
     -o-transition: .3s all ease;
     transition: .3s all ease;
-    background: #e81050; }
+    background:  {{page.primary_colour}}; }
     .team-member .social li {
       list-style: none; }
       .team-member .social li a {
@@ -1684,7 +1684,7 @@ h1, h2, h3, h4, h5,
   padding: 20px;
   left: 50%;
   display: inline-block;
-  background: #e81050; }
+  background:  {{page.primary_colour}}; }
   .custom-direction a {
     text-decoration: none;
     color: #fff;
@@ -1792,6 +1792,10 @@ h1, h2, h3, h4, h5,
     color: #fff;
     border-bottom: 1px solid rgba(255, 255, 255, 0.5); }
 
+.icons {
+  color: {{page.primary_colour}}
+}
+
 </style>
 
 <!DOCTYPE html>
@@ -1833,10 +1837,15 @@ h1, h2, h3, h4, h5,
     <header class="site-navbar py-4 js-sticky-header site-navbar-target" role="banner">
 
       <div class="container">
-        <div class="row align-items-center">
+        <div class="row align-items-center">        
           
+
           <div class="col-6 col-xl-2">
-            <h1 class="mb-0 site-logo"><a href="#" class="h2 mb-0">{{page.client_organisationName}}<span class="text-primary"></span> </a></h1>
+            {% if page.logo %}            
+               <a href="#">{% image page.logo original class="img-fluid mb-0" %}<span class="text-primary"></span></a>
+            {% else %}
+              <h1 class="mb-0 site-logo"><a href="#">{{page.client_organisationName}}<span class="text-primary"></span> </a></h1>
+            {% endif %}
           </div>
 
           <div class="col-12 col-md-10 d-none d-xl-block">
@@ -1882,17 +1891,14 @@ h1, h2, h3, h4, h5,
       {% image page.intro_background original as img %}
     <div class="site-blocks-cover overlay" style="background-image: url({{img.url}});" data-aos="fade" id="home-section">
       <div class="container">
-        <div class="row align-items-center justify-content-center">
-
-          
+        <div class="row align-items-center justify-content-center">          
               <div class="col-md-6 mt-lg-5 text-center">
                 <h1>{{page.intro_header}}</h1>
                 <p class="mb-5">{{page.intro_text|richtext}}</p>
                 <div>
                   <a href="#{{page.blurb_header|cut:" "}}" class="btn btn-primary mr-2 mb-2 smoothscroll">{{page.intro_continue_button_text}}</a>
                 </div>
-              </div>
-            
+              </div>            
         </div>
       </div>
     </div>  
@@ -2008,7 +2014,7 @@ h1, h2, h3, h4, h5,
           {% for i in self.iconListOrderable.all %}          
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4" data-aos="fade-up" data-aos-delay="{{ forloop.counter }}">
             <div class="unit-4 d-flex">
-              <div class="unit-4-icon mr-4"><span class="text-primary icon-{{i.iconItem.icon}}"></span></div>
+              <div class="unit-4-icon mr-4"><span class=" icons icon-{{i.iconItem.icon}}"></span></div>
               <div>
                 <h3>{{i.iconItem.title}}</h3>
                 {{i.iconItem.text|richtext}}

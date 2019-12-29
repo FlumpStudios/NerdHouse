@@ -212,7 +212,9 @@ class HomePage(Page):
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")
     
     intro_text = RichTextField(blank=True)
-    intro_continue_button_text = models.CharField(max_length=50, default='Continue')        
+    intro_continue_button_text = models.CharField(max_length=50, default='Continue')    
+
+
     
     client_firstname = models.CharField(max_length=50, default="Joe")    
     client_surname = models.CharField(max_length=50, default="Blogs")    
@@ -262,7 +264,10 @@ class HomePage(Page):
     show_contact_in_navigation = models.BooleanField(default=True)
 
     footer_info_title = models.CharField(max_length=50, default="About") 
-    footer_info = RichTextField(blank=True)    
+    footer_info = RichTextField(blank=True)   
+
+    primary_colour = models.CharField(max_length=50, default="#f37e77")
+    secondary_colour = models.CharField(max_length=50, default="#ffffff")
     
     intro_background = models.ForeignKey(
         'wagtailimages.Image',
@@ -273,6 +278,14 @@ class HomePage(Page):
     )
 
     blurb_background = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    
+    logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
         blank=True,
@@ -299,6 +312,16 @@ class HomePage(Page):
 
             ],
             heading="Personal Information",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('primary_colour'),
+                ImageChooserPanel('logo')
+            ],
+            heading="Presentation",  
         ),
     ]
 
