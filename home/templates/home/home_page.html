@@ -1910,11 +1910,8 @@ h1, h2, h3, h4, h5,
         <div class="img-box">
           <span class="sub-title">{{page.blurb_header}}</span>
           <h2>{{page.blurb_subheader}}</h2>
-          {{page.blurb_text|richtext}}          
-        </div>
-          {% if page.blurb_link  %}   
-            <p><a href="{{page.blurb_link}}" class="btn btn-primary mr-2 mb-2">{{page.blurb_buttonText}}</a></p> 
-          {% endif %} 
+          {{page.blurb_text|richtext}}                    
+        </div>           
       </div>  
     </div>
      {% endif %}

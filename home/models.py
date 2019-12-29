@@ -231,9 +231,7 @@ class HomePage(Page):
     
     blurb_header = models.CharField(max_length=50, default="Blurb")    
     blurb_subheader = models.CharField(max_length=50, default="this is a blurb ")
-    blurb_text = RichTextField(blank=True)        
-    blurb_buttonText = models.CharField(max_length=50, default="Find out more")
-    blurb_link = models.URLField(null=True, blank=True)
+    blurb_text = RichTextField(blank=True)            
     show_blurb = models.BooleanField(default=True)
     show_blurb_in_navigation = models.BooleanField(default=False)
 
@@ -344,8 +342,6 @@ class HomePage(Page):
                 FieldPanel('blurb_subheader'),
                 FieldPanel('blurb_text'),
                 ImageChooserPanel('blurb_background'),
-                FieldPanel('blurb_buttonText'),
-                FieldPanel('blurb_link'),
                 FieldPanel('show_blurb'),
                 FieldPanel('show_blurb_in_navigation')
             ],
