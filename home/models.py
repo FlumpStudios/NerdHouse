@@ -208,6 +208,7 @@ class testimonialItem(models.Model):
         return self.author
 
 class HomePage(Page):
+    subpage_types = []
     #DATABASE FIELDS
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")
     
