@@ -1,20 +1,56 @@
-{% extends "base.html" %}
-
+{% extends "home/home_page.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% load static %}
 {% load wagtailcore_tags %}
-
 {% block body_class %}template-blogindexpage{% endblock %}
-
 {% block content %}
-    <h1>{{ page.title }}</h1>
-
-    <div class="intro">{{ page.intro|richtext }}</div>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'fonts/icomoon/style.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/jquery-ui.css'%}">    
+    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">    
+    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css'%}">        
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-datepicker.css'%}">    
+    <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css'%}">
+    <link rel="stylesheet" href="{% static 'css/aos.css'%}">
+<div class="container">
+    <div class="row">        
+        <div class="col-md-12">
+            <h1>{{ page.title }}</h1>
+            <p>{{ page.intro|richtext}}</p>
+        </div>    
+</div>
 
 {% for post in blogpages %}
     {% with post=post.specific %}
-        <h2><a href="{% pageurl post %}">{{ post.title }}</a></h2>
-        <p>{{ post.intro }}</p>
-        {{ post.body|richtext }}
+    <div style="background:#f8f9fa" class="card">
+        <div class="card-body">
+      
+                <div class="row">        
+                        <div class="col-md-4">
+                                {% with post.main_image as main_image %}
+                                {% if main_image %}{% image main_image fill-320x200 %}{% endif %}
+                                {% endwith %}
+                        </div>  
+                        <div class="col-md-8">
+                                <h4>
+                                        <a href="{% pageurl post %}">
+                                            {{ post.title }}
+                                        </a>
+                                    </h4>
+                                    
+                                    <p> {{ post.intro }}</p>
+                                    <em>{{ post.body|richtext }}</em>
+                                    </div>
+                                </div>                              
+                        </div>  
+                </div>
+            
+       
+
+        
     {% endwith %}
 {% endfor %}
-
+</div>
 {% endblock %}

@@ -1,4 +1,5 @@
-﻿{% load static %}
+﻿{% load static wagtailuserbar %}
+{% load static %}
 {% load wagtailimages_tags %}
 {% load wagtailcore_tags %}
 
@@ -1797,7 +1798,7 @@ h1, h2, h3, h4, h5,
 }
 
 </style>
-
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1817,7 +1818,6 @@ h1, h2, h3, h4, h5,
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css'%}">
     <link rel="stylesheet" href="{% static 'css/aos.css'%}">
     
-
     
   </head>
   <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -2286,3 +2286,4 @@ h1, h2, h3, h4, h5,
   <script src="{% static 'js/main.js'%}"></script>    
   </body>
 </html>
+{% endblock %}
