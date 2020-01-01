@@ -278,6 +278,12 @@ class HomePage(Page):
     primary_colour = models.CharField(max_length=50, default="#f37e77")
     secondary_colour = models.CharField(max_length=50, default="#ffffff")
     
+    blog_title = models.CharField(max_length=50, default="Blogs")
+    preview_word_limit = models.IntegerField(default=140)
+
+
+    
+
     intro_background = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -418,6 +424,16 @@ class HomePage(Page):
                 FieldPanel('show_testimonials_in_navigation')
             ],
             heading="Icon List",  
+        ),
+    ]
+
+    content_panels += [
+        MultiFieldPanel(
+            [
+                FieldPanel('blog_title'),                
+                FieldPanel('preview_word_limit')                
+            ],
+            heading="Blog",  
         ),
     ]
 

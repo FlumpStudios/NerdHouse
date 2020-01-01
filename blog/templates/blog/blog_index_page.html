@@ -30,7 +30,11 @@
                 <div class="row">        
                         <div class="col-md-4">
                                 {% with post.main_image as main_image %}
-                                {% if main_image %}{% image main_image fill-320x200 %}{% endif %}
+                                {% if main_image %}
+                                {% image main_image fill-320x200 %}
+                                {% else %}
+                                <img src="{% static 'images/blog_img.jpg'%}"/>
+                                {% endif %}
                                 {% endwith %}
                         </div>  
                         <div class="col-md-8">
@@ -39,8 +43,8 @@
                                             {{ post.title }}
                                         </a>
                                     </h4>                                    
-                                    <p> {{ post.intro }}</p>
-                                    <em>{{ post.body|richtext }}</em>
+                                    <p> {{ post.intro }} - {{ post.author }}</p>
+                                    <em>{{ post.body|truncatechars_html:140|richtext }}</em>
                                     </div>
                                 </div>                              
                         </div>  

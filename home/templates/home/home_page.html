@@ -2051,30 +2051,33 @@ h1, h2, h3, h4, h5,
     </section>
   {% endif %}
 
+{% if blogpages %}
     <section class="site-section" id="blog-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
-            <h3 class="section-sub-title">Blog</h3>
-            <h2 class="section-title mb-3">Our Blog Posts</h2>
+            <h2 class="section-title mb-3">{{page.blog_title}}</h2>
           </div>
         </div>
-
         <div class="row">
           
     {% for post in blogpages %}
         {% with post=post.specific %}        
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <a href="/blogs/{{post.slug}}">
+              <a href="{% pageurl post %}">
                   {% with post.main_image as main_image %}
-                  {% if main_image %}{% image main_image fill-320x200 %}{% endif %}
+                  {% if main_image %}
+                    {% image main_image fill-320x200 %}
+                  {% else %}
+                    <img src="{% static 'images/blog_img.jpg'%}"/>
+                  {% endif %}
                   {% endwith %}
               </a>
-              <h2 class="font-size-regular"><a href="blogs/{{post.slug}}">{{post.intro}}</a></h2>
+              <h2 class="font-size-regular"><a href="{% pageurl post %}">{{post.title}}</a></h2>
               <div class="meta mb-4">{{post.author}}<span class="mx-2">&bullet;</span>{{post.date}}<span class="mx-2">&bullet;</span></div>
-              <p>{{post.body|truncatechars_html:140|richtext}}</p>
-              <p><a href="/blogs/{{post.slug}}">Continue Reading...</a></p>
+              <p>{{post.body|truncatechars_html:page.preview_word_limit|richtext}}</p>
+              <p><a href="{% pageurl post %}">Continue Reading...</a></p>
             </div> 
           </div>
         {% endwith %}
@@ -2082,6 +2085,7 @@ h1, h2, h3, h4, h5,
         </div>
       </div>
     </section>
+    {% endif %}
 
 {% if page.show_contact_form  %}
     <section class="site-section bg-light" id="{{page.contact_title|cut:" "}}">
