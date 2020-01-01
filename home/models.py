@@ -1,5 +1,4 @@
 from django.db import models
-from django.db import models
 import os
 import sys
 from modelcluster.fields import ParentalKey
@@ -12,6 +11,8 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 from modelcluster.fields import ParentalKey
+from blog.models import BlogIndexPage 
+from blog.models import BlogPage 
 
 class carouselOrderable(Orderable, models.Model):
     page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='carouselOrderable')
@@ -209,6 +210,14 @@ class testimonialItem(models.Model):
 
 class HomePage(Page):
     #subpage_types = []
+
+    def get_context(self, request):
+        # Update context to include only published posts, ordered by reverse-chron
+        context = super().get_context(request)
+        blog_index_page = BlogIndexPage.objects.first()
+        blog_pages = BlogPage.objects.child_of(blog_index_page)
+        context['blogpages'] = blog_pages
+        return context  
     
     #DATABASE FIELDS
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")
@@ -432,7 +441,7 @@ class HomePage(Page):
             ],
             heading="Footer",  
         ),
-    ]
+    ]   
 
     # promote_panels = [
     #     MultiFieldPanel(Page.promote_panels, "Common page configuration"),

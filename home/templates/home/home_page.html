@@ -2051,7 +2051,7 @@ h1, h2, h3, h4, h5,
     </section>
   {% endif %}
 
-    <!-- <section class="site-section" id="blog-section">
+    <section class="site-section" id="blog-section">
       <div class="container">
         <div class="row mb-5">
           <div class="col-12 text-center">
@@ -2061,36 +2061,27 @@ h1, h2, h3, h4, h5,
         </div>
 
         <div class="row">
+          
+    {% for post in blogpages %}
+        {% with post=post.specific %}        
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <a href="single.html"><img src="{% static 'images/img_1.jpg'%}" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">Ham Brook <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="single.html">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="single.html">Continue Reading...</a></p>
+              <a href="/blogs/{{post.slug}}">
+                  {% with post.main_image as main_image %}
+                  {% if main_image %}{% image main_image fill-320x200 %}{% endif %}
+                  {% endwith %}
+              </a>
+              <h2 class="font-size-regular"><a href="blogs/{{post.slug}}">{{post.intro}}</a></h2>
+              <div class="meta mb-4">{{post.author}}<span class="mx-2">&bullet;</span>{{post.date}}<span class="mx-2">&bullet;</span></div>
+              <p>{{post.body|truncatechars_html:140|richtext}}</p>
+              <p><a href="/blogs/{{post.slug}}">Continue Reading...</a></p>
             </div> 
           </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <div class="h-entry">
-              <a href="single.html"><img src="{% static 'images/img_2.jpg'%}" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">James Phelps <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="single.html">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="single.html">Continue Reading...</a></p>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
-            <div class="h-entry">
-              <a href="single.html"><img src="{% static 'images/img_1.jpg'%}" alt="Image" class="img-fluid"></a>
-              <h2 class="font-size-regular"><a href="single.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-              <div class="meta mb-4">James Phelps <span class="mx-2">&bullet;</span> Jan 18, 2019<span class="mx-2">&bullet;</span> <a href="single.html">News</a></div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus eligendi nobis ea maiores sapiente veritatis reprehenderit suscipit quaerat rerum voluptatibus a eius.</p>
-              <p><a href="single.html">Continue Reading...</a></p>
-            </div> 
-          </div>          
+        {% endwith %}
+      {% endfor %}
         </div>
       </div>
-    </section> -->
+    </section>
 
 {% if page.show_contact_form  %}
     <section class="site-section bg-light" id="{{page.contact_title|cut:" "}}">

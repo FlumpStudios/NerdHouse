@@ -29,6 +29,7 @@ class BlogPage(Page):
     subpage_types = ['BlogPage']
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
+    author = models.CharField(max_length=50, default="Joe Blogs")
     body = RichTextField(blank=True)
 
     def main_image(self):
@@ -46,6 +47,7 @@ class BlogPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('date'),
         FieldPanel('intro'),
+        FieldPanel('author'),
         FieldPanel('body', classname="full"),
         InlinePanel('gallery_images', label="Gallery images"),
     ]
