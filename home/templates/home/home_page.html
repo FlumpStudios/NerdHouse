@@ -1956,9 +1956,11 @@ h1, h2, h3, h4, h5,
                 {% image g.image original class="img-fluid" %} 
               {% endfor %}             
             </div>
+            {% if self.carouselOrderable|length > 1 %}
             <div class="custom-direction">
               <a href="#" class="custom-prev">Prev</a><a href="#" class="custom-next">Next</a>
             </div>
+            {% endif %}
             {% endif %}
           </div>
           <div class="col-lg-5 ml-auto">            
@@ -1967,7 +1969,7 @@ h1, h2, h3, h4, h5,
                {{page.second_blurb_text|richtext}}
                 {% if page.second_blurb_link  %}   
                   <p><a href="{{page.second_blurb_link}}" class="btn btn-primary mr-2 mb-2">{{page.second_blurb_buttonText}}</a></p> 
-                {% endif %}           
+              {% endif %}           
           </div>
         </div>
       </div>
