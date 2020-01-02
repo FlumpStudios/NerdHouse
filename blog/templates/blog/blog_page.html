@@ -20,33 +20,32 @@
     <link rel="stylesheet" href="{% static 'css/aos.css'%}">   
     <link rel="stylesheet" href="{% static 'css/style.css'%}">
 </head>
-<body>
-
-    
-          <div class="container">        
+<body>    
+  
+  
+  <div style="padding:0 20%">
+      <div class="container">        
         <div class="row">
           <div class="col-md-12">
-              <h1>{{ page.title }}</h1>
-    <p class="meta">{{ page.date }}</p>
+              <h1 style="color: rgba(0, 0, 0, 0.84);font-family: Georgia, 'Times New Roman', Times, serif;" >{{ page.title }}</h1>
+    <p><strong><small>{{ page.author }}</small></strong>
+    </br>
+      <small>{{ page.date }}</small></p>
 
-    <div class="intro">{{ page.intro }}</div>
-    <div style="width:60%;">
-             <div class="owl-carousel slide-one-item-alt">
-              {% for item in page.gallery_images.all %}
-                {% image item.image original %} 
-              {% endfor %}                 
-            </div>
-                {% if page.gallery_images.all|length > 1 %}
-            <div class="custom-direction">
-              <a href="#" class="custom-prev">Prev</a><a href="#" class="custom-next">Next</a>
-            </div>
-            {% endif %}
-       </div>
-
-    {{ page.body|richtext }}
+    <h4 class="intro">{{ page.intro }}</h4>
+    {% image page.main_image original style="width:100%;height:auto" %}
     
-    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p>
+    <div class="text-center">
+      <small>
+         {{page.caption}}
+      </small>
+   </div>
+  </br>
+</br>
+    {{ page.body|richtext }}    
+    <p><a href="{{ page.get_parent.url }}">Return to blog</a></p> 
      </div>
+</div>
 </div>
     <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
   <script src="{% static 'js/jquery-migrate-3.0.1.min.js'%}"></script>

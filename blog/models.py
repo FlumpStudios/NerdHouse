@@ -31,13 +31,15 @@ class BlogPage(Page):
     intro = models.CharField(max_length=250)
     author = models.CharField(max_length=50, default="Joe Blogs")
     body = RichTextField(blank=True)
-
-    def main_image(self):
-        gallery_item = self.gallery_images.first()
-        if gallery_item:
-            return gallery_item.image
-        else:
-            return None
+    caption = models.CharField(blank=True, max_length=250)
+    main_image = models.ForeignKey(
+        'wagtailimages.Image', 
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL, 
+        related_name='+'
+    )
+   
 
     search_fields = Page.search_fields + [
         index.SearchField('intro'),
@@ -49,20 +51,7 @@ class BlogPage(Page):
         FieldPanel('intro'),
         FieldPanel('author'),
         FieldPanel('body', classname="full"),
-        InlinePanel('gallery_images', label="Gallery images"),
+        ImageChooserPanel('main_image'),
+        FieldPanel('caption')
     ]
 
-
-
-
-class BlogPageGalleryImage(Orderable):
-    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
-    image = models.ForeignKey(
-        'wagtailimages.Image', on_delete=models.CASCADE, related_name='+'
-    )
-    caption = models.CharField(blank=True, max_length=250)
-
-    panels = [
-        ImageChooserPanel('image'),
-        FieldPanel('caption'),
-    ]
