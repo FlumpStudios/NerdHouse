@@ -2067,7 +2067,7 @@ h1, h2, h3, h4, h5,
         {% with post=post.specific %}        
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-              <a href="{% pageurl post %}">
+                <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >
                   {% with post.main_image as main_image %}
                   {% if main_image %}
                     {% image main_image fill-320x200 %}
@@ -2076,13 +2076,22 @@ h1, h2, h3, h4, h5,
                   {% endif %}
                   {% endwith %}
               </a>
-              <h2 class="font-size-regular"><a href="{% pageurl post %}">{{post.title}}</a></h2>
+              <h2 class="font-size-regular"><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >{{post.title}}</a></h2>
               <div class="meta mb-4">{{post.author}}<span class="mx-2">&bullet;</span>{{post.date}}<span class="mx-2">&bullet;</span></div>
               <p>{{post.body|truncatechars_html:page.preview_word_limit|richtext}}</p>
-              <p><a href="{% pageurl post %}">Continue Reading...</a></p>
+              <p><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >Continue Reading...</a></p>
             </div> 
           </div>
-        {% endwith %}
+        {% endwith %}        
+
+          <div class="modal fade bd-example-modal-lg-{{ forloop.counter }}" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <iframe src="{% pageurl post %}"></iframe>
+              </div>
+            </div>
+          </div>
+
       {% endfor %}
         </div>
       </div>
@@ -2253,7 +2262,7 @@ h1, h2, h3, h4, h5,
         <div class="row pt-5 mt-5 text-center">
           <div class="col-md-12">
             <div class="border-top pt-5">
-            <p>
+      <p>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
@@ -2284,3 +2293,12 @@ h1, h2, h3, h4, h5,
   </body>
 </html>
 {% endblock %}
+
+<style>
+.modal-lg {
+    max-width: 90% !important;
+}
+iframe {
+  height: 90vh;
+}
+</style>
