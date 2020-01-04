@@ -13,6 +13,7 @@ from wagtail.search import index
 from modelcluster.fields import ParentalKey
 from blog.models import BlogIndexPage 
 from blog.models import BlogPage 
+import feedparser
 
 class carouselOrderable(Orderable, models.Model):
     page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='carouselOrderable')
@@ -216,9 +217,12 @@ class HomePage(Page):
         context = super().get_context(request)
         blog_index_page = BlogIndexPage.objects.first()
         blog_pages = BlogPage.objects.child_of(blog_index_page)
+        medium_blogs = feedparser.parse("https://timesofindia.indiatimes.com/rssfeedstopstories.cms")
         context['blogpages'] = blog_pages
+        context['medium_blogs'] = medium_blogs
         return context  
     
+
     #DATABASE FIELDS
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")
     
