@@ -1906,7 +1906,7 @@ h1, h2, h3, h4, h5,
     {% if page.show_blurb  %}
     <div class="site-section cta-big-image border-bottom" id="{{page.blurb_header|cut:" "}}">
       <div class="container">
-        {% image page.blurb_background original class="img-fluid" %}
+        {% image page.blurb_background fill-1080x720-c100 class="img-fluid" %}
         <div class="img-box">
           <span class="sub-title">{{page.blurb_header}}</span>
           <h2>{{page.blurb_subheader}}</h2>
@@ -1931,7 +1931,7 @@ h1, h2, h3, h4, h5,
             <div class="col-md-6 col-lg-3 mb-4">
                   <div class="team-member">
                     <figure>
-                      {% image g.gallery.image original class="img-fluid" %}
+                      {% image g.gallery.image fill-255x255-c100 class="img-fluid" %}
                     </figure>
                     <div class="p-3">
                       <h3>{{g.gallery.name}}</h3>
@@ -1953,7 +1953,7 @@ h1, h2, h3, h4, h5,
           {% if self.carouselOrderable.all  %}           
             <div class="owl-carousel slide-one-item-alt">
               {% for g in self.carouselOrderable.all %}
-                {% image g.image original class="img-fluid" %} 
+                {% image g.image fill-650x650-c100 class="img-fluid" %} 
               {% endfor %}             
             </div>
             {% if self.carouselOrderable|length > 1 %}
@@ -2070,7 +2070,7 @@ h1, h2, h3, h4, h5,
                 <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >
                   {% with post.main_image as main_image %}
                   {% if main_image %}
-                    {% image main_image fill-320x200 %}
+                    {% image main_image fill-320x200-c100 %}
                   {% else %}
                     <img src="{% static 'images/blog_img.jpg'%}"/>
                   {% endif %}
