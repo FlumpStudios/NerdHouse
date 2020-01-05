@@ -27,7 +27,7 @@ class BlogIndexPage(Page):
     ]
 
 class BlogPage(Page):
-    subpage_types = ['BlogPage']
+    subpage_types = []
     date = models.DateField("Post date")
     intro = models.CharField(max_length=250)
     author = models.CharField(max_length=50, default="Joe Blogs")

@@ -15,6 +15,7 @@ from blog.models import BlogIndexPage
 from blog.models import BlogPage 
 import feedparser
 
+
 class carouselOrderable(Orderable, models.Model):
     page = ParentalKey('HomePage', on_delete=models.CASCADE, related_name='carouselOrderable')
     
@@ -210,7 +211,10 @@ class testimonialItem(models.Model):
         return self.author
 
 class HomePage(Page):
-    #subpage_types = []
+    subpage_types = ['blog.BlogIndexPage']
+
+    def has_address(self):
+        return self.client_organisationName or self.client_addressLine1 or self.client_addressLine2 or self.client_town or self.client_county or self.client_postcode
 
     def get_context(self, request):
         # Update context to include only published posts, ordered by reverse-chron
@@ -219,29 +223,27 @@ class HomePage(Page):
         blog_pages = BlogPage.objects.child_of(blog_index_page) if blog_index_page else []
         medium_blogs = feedparser.parse(str("https://medium.com/feed/" + self.medium_username) if self.medium_username else "" )
         context['blogpages'] = blog_pages
-        context['medium_blogs'] = medium_blogs
-        return context  
-    
+        context['medium_blogs'] = medium_blogs.entries[:self.medium_blog_display_limit]
+        context['has_address'] = self.has_address()
+        return context      
 
     #DATABASE FIELDS
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")    
     intro_text = RichTextField(blank=True)
-    intro_continue_button_text = models.CharField(max_length=50, default='Continue')    
-
-
+    intro_continue_button_text = models.CharField(max_length=50, default='Continue', blank=True)    
     
     client_firstname = models.CharField(max_length=50, default="Joe", blank=True)    
     client_surname = models.CharField(max_length=50, default="Blogs", blank=True)    
-    client_organisationName = models.CharField(max_length=50, default="My Company", null=True, blank=True)
-    client_addressLine1 = models.CharField(max_length=50, default="Line 1", null=True, blank=True)
-    client_addressLine2 = models.CharField(max_length=50, default="Line 2", null=True, blank=True)
-    client_town = models.CharField(max_length=50, default="Town", null=True, blank=True)
-    client_county = models.CharField(max_length=50, default="County", null=True, blank=True)
-    client_country = models.CharField(max_length=50, default="Country", null=True, blank=True)
-    client_postcode = models.CharField(max_length=50, default="XX00 0XX ", null=True, blank=True)
-    client_email = models.CharField(max_length=50, default="joe@bloggs.com", null=True)
-    client_phone = models.CharField(max_length=50, default="01234 456789", null=True, blank=True)
-    client_moblie = models.CharField(max_length=50, default="01234 456789", null=True, blank=True)    
+    client_organisationName = models.CharField(max_length=50, default="My Company", blank=True)
+    client_addressLine1 = models.CharField(max_length=50, default="Line 1",  blank=True)
+    client_addressLine2 = models.CharField(max_length=50, default="Line 2",  blank=True)
+    client_town = models.CharField(max_length=50, default="Town",  blank=True)
+    client_county = models.CharField(max_length=50, default="County",  blank=True)
+    client_country = models.CharField(max_length=50, default="Country",  blank=True)
+    client_postcode = models.CharField(max_length=50, default="XX00 0XX ",  blank=True)
+    client_email = models.CharField(max_length=50, default="joe@bloggs.com" )
+    client_phone = models.CharField(max_length=50, default="01234 456789",  blank=True)
+    client_moblie = models.CharField(max_length=50, default="01234 456789",  blank=True)    
     
     blurb_header = models.CharField(max_length=50, default="Blurb", blank=True)    
     blurb_subheader = models.CharField(max_length=50, default="this is a blurb", blank=True)
@@ -257,7 +259,7 @@ class HomePage(Page):
     second_blurb_subheader = models.CharField(max_length=50, default="My Second Blurb 2", blank=True)
     second_blurb_text = RichTextField(blank=True)
     second_blurb_buttonText = models.CharField(max_length=50, default="Find out more", blank=True)
-    second_blurb_link = models.URLField(null=True, blank=True)
+    second_blurb_link = models.URLField(blank=True, default="#")
     show_second_blurb = models.BooleanField(default=True)
     show_second_blurb_in_navigation = models.BooleanField(default=False)
  

@@ -1900,10 +1900,12 @@ h1, h2, h3, h4, h5,
               <div class="col-md-6 mt-lg-5 text-center">
                 <h1>{{page.intro_header}}</h1>
                 <p class="mb-5">{{page.intro_text|richtext}}</p>
+                {% if page.intro_continue_button_text %}
                 <div>
                   <a href="#{{page.blurb_header|cut:" "}}" class="btn btn-primary mr-2 mb-2 smoothscroll">{{page.intro_continue_button_text}}</a>
                 </div>
               </div>            
+              {% endif %}
         </div>
       </div>
     </div>  
@@ -2058,7 +2060,7 @@ h1, h2, h3, h4, h5,
     </section>
   {% endif %}
 
-{% if blogpages or medium_blogs.entries %}
+{% if blogpages or medium_blogs %}
     <section class="site-section" id="blog-section">
       <div class="container">
         <div class="row mb-5">
@@ -2100,7 +2102,7 @@ h1, h2, h3, h4, h5,
 
 
 
-      {% for med_post in medium_blogs.entries %}              
+      {% for med_post in medium_blogs %}              
         <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
           <div class="h-entry">
               <a href="{{med_post.links.0.href }}" target="_blank">
@@ -2177,11 +2179,15 @@ h1, h2, h3, h4, h5,
               </div>
             </form>
           </div>
-          <div class="col-md-5">
-            
+          <div class="col-md-5">           
             <div class="p-4 mb-3 bg-white">
+             {% if has_address %}
               <p class="mb-0 font-weight-bold">Address</p>
               <p class="mb-4">
+              {{page.client_addressLine1}}
+              {% if page.client_organisationName %}
+              ,
+              {% endif %}
               {{page.client_addressLine1}}
               {% if page.client_addressLine1  %}
               ,
@@ -2209,6 +2215,7 @@ h1, h2, h3, h4, h5,
 
               {{page.client_postcode}}              
               </p>
+              {% endif %}
 
               {% if page.client_phone  %}
               <p class="mb-0 font-weight-bold">Phone</p>
