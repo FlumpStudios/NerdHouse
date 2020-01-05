@@ -216,36 +216,35 @@ class HomePage(Page):
         # Update context to include only published posts, ordered by reverse-chron
         context = super().get_context(request)
         blog_index_page = BlogIndexPage.objects.first()
-        blog_pages = BlogPage.objects.child_of(blog_index_page)
-        medium_blogs = feedparser.parse("https://timesofindia.indiatimes.com/rssfeedstopstories.cms")
+        blog_pages = BlogPage.objects.child_of(blog_index_page) if blog_index_page else []
+        medium_blogs = feedparser.parse(str("https://medium.com/feed/" + self.medium_username) if self.medium_username else "" )
         context['blogpages'] = blog_pages
         context['medium_blogs'] = medium_blogs
         return context  
     
 
     #DATABASE FIELDS
-    intro_header = models.CharField(max_length=50,default="Welcome to our website!")
-    
+    intro_header = models.CharField(max_length=50,default="Welcome to our website!")    
     intro_text = RichTextField(blank=True)
     intro_continue_button_text = models.CharField(max_length=50, default='Continue')    
 
 
     
-    client_firstname = models.CharField(max_length=50, default="Joe")    
-    client_surname = models.CharField(max_length=50, default="Blogs")    
-    client_organisationName = models.CharField(max_length=50, default="My Company", null=True)
-    client_addressLine1 = models.CharField(max_length=50, default="Line 1", null=True)
-    client_addressLine2 = models.CharField(max_length=50, default="Line 2", null=True)
-    client_town = models.CharField(max_length=50, default="Town", null=True)
-    client_county = models.CharField(max_length=50, default="County", null=True)
-    client_country = models.CharField(max_length=50, default="Country", null=True)
-    client_postcode = models.CharField(max_length=50, default="XX00 0XX ", null=True)
+    client_firstname = models.CharField(max_length=50, default="Joe", blank=True)    
+    client_surname = models.CharField(max_length=50, default="Blogs", blank=True)    
+    client_organisationName = models.CharField(max_length=50, default="My Company", null=True, blank=True)
+    client_addressLine1 = models.CharField(max_length=50, default="Line 1", null=True, blank=True)
+    client_addressLine2 = models.CharField(max_length=50, default="Line 2", null=True, blank=True)
+    client_town = models.CharField(max_length=50, default="Town", null=True, blank=True)
+    client_county = models.CharField(max_length=50, default="County", null=True, blank=True)
+    client_country = models.CharField(max_length=50, default="Country", null=True, blank=True)
+    client_postcode = models.CharField(max_length=50, default="XX00 0XX ", null=True, blank=True)
     client_email = models.CharField(max_length=50, default="joe@bloggs.com", null=True)
-    client_phone = models.CharField(max_length=50, default="01234 456789", null=True)
-    client_moblie = models.CharField(max_length=50, default="01234 456789", null=True)    
+    client_phone = models.CharField(max_length=50, default="01234 456789", null=True, blank=True)
+    client_moblie = models.CharField(max_length=50, default="01234 456789", null=True, blank=True)    
     
-    blurb_header = models.CharField(max_length=50, default="Blurb")    
-    blurb_subheader = models.CharField(max_length=50, default="this is a blurb ")
+    blurb_header = models.CharField(max_length=50, default="Blurb", blank=True)    
+    blurb_subheader = models.CharField(max_length=50, default="this is a blurb", blank=True)
     blurb_text = RichTextField(blank=True)            
     show_blurb = models.BooleanField(default=True)
     show_blurb_in_navigation = models.BooleanField(default=False)
@@ -254,39 +253,37 @@ class HomePage(Page):
     image_gallery_text = RichTextField(blank=True)
     show_gallery_in_navigation = models.BooleanField(default=True)
 
-    second_blurb_header = models.CharField(max_length=50, default="Blurb 2")    
-    second_blurb_subheader = models.CharField(max_length=50, default="My Second Blurb 2")
+    second_blurb_header = models.CharField(max_length=50, default="Blurb 2", blank=True)    
+    second_blurb_subheader = models.CharField(max_length=50, default="My Second Blurb 2", blank=True)
     second_blurb_text = RichTextField(blank=True)
-    second_blurb_buttonText = models.CharField(max_length=50, default="Find out more")
+    second_blurb_buttonText = models.CharField(max_length=50, default="Find out more", blank=True)
     second_blurb_link = models.URLField(null=True, blank=True)
     show_second_blurb = models.BooleanField(default=True)
     show_second_blurb_in_navigation = models.BooleanField(default=False)
  
-    enumerated_list_header = models.CharField(max_length=50, default="Approach")
+    enumerated_list_header = models.CharField(max_length=50, default="Approach", blank=True)
     show_enumerated_list_in_navigation = models.BooleanField(default=True)    
 
-    icon_list_header = models.CharField(max_length=50, default="Services")    
+    icon_list_header = models.CharField(max_length=50, default="Services", blank=True)    
     show_icon_list_in_navigation = models.BooleanField(default=True)
 
-    testimonials_header = models.CharField(max_length=50, default="Testimonials")
+    testimonials_header = models.CharField(max_length=50, default="Testimonials", blank=True)
     show_testimonials_in_navigation = models.BooleanField(default=False) 
 
-    contact_title = models.CharField(max_length=50, default="Contact")        
-    contact_subtitle = models.CharField(max_length=50, default="Get in contact")    
+    contact_title = models.CharField(max_length=50, default="Contact", blank=True)        
+    contact_subtitle = models.CharField(max_length=50, default="Get in contact", blank=True)    
     show_contact_form = models.BooleanField(default=True)
     show_contact_in_navigation = models.BooleanField(default=True)
 
-    footer_info_title = models.CharField(max_length=50, default="About") 
+    footer_info_title = models.CharField(max_length=50, default="About", blank=True) 
     footer_info = RichTextField(blank=True)   
 
     primary_colour = models.CharField(max_length=50, default="#f37e77")
     secondary_colour = models.CharField(max_length=50, default="#ffffff")
     
-    blog_title = models.CharField(max_length=50, default="Blogs")
-    preview_word_limit = models.IntegerField(default=140)
-
-
+    blog_title = models.CharField(max_length=50, default="Blogs", blank=True)
     
+    medium_username = models.CharField(max_length=50, null=True, blank=True)
 
     intro_background = models.ForeignKey(
         'wagtailimages.Image',
@@ -435,7 +432,8 @@ class HomePage(Page):
         MultiFieldPanel(
             [
                 FieldPanel('blog_title'),                
-                FieldPanel('preview_word_limit')                
+                
+                FieldPanel('medium_username')            
             ],
             heading="Blog",  
         ),

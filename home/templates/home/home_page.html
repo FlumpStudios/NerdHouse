@@ -1797,6 +1797,11 @@ h1, h2, h3, h4, h5,
   color: {{page.primary_colour}}
 }
 
+.medium-blog-image{
+  height: 200px;
+  width: 320px;
+}
+
 </style>
 {% block content %}
 <!DOCTYPE html>
@@ -2053,7 +2058,7 @@ h1, h2, h3, h4, h5,
     </section>
   {% endif %}
 
-{% if blogpages %}
+{% if blogpages or medium_blogs.entries %}
     <section class="site-section" id="blog-section">
       <div class="container">
         <div class="row mb-5">
@@ -2078,7 +2083,7 @@ h1, h2, h3, h4, h5,
               </a>
               <h2 class="font-size-regular"><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >{{post.title}}</a></h2>
               <div class="meta mb-4">{{post.author}}<span class="mx-2">&bullet;</span>{{post.date}}<span class="mx-2">&bullet;</span></div>
-              <p>{{post.body|truncatechars_html:page.preview_word_limit|richtext}}</p>
+              
               <p><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >Continue Reading...</a></p>
             </div> 
           </div>
@@ -2091,12 +2096,33 @@ h1, h2, h3, h4, h5,
               </div>
             </div>
           </div>
-
       {% endfor %}
+
+
+
+      {% for med_post in medium_blogs.entries %}              
+        <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
+          <div class="h-entry">
+              <a href="{{med_post.links.0.href }}" target="_blank">
+                  <img id="medium_img_medium-blog-summary-{{ forloop.counter }}" class="medium-blog-image" src="{% static 'images/blog_img.jpg'%}"/>
+               <div class="medium-blog-summary" id="medium-blog-summary-{{forloop.counter}}">
+                  {{med_post.summary|richtext}}
+                </div>
+            </a>
+            <h2 class="font-size-regular"><a href="{{med_post.links.0.href }}" target="_blank" >{{med_post.title}}</a></h2>
+            <div class="meta mb-4">{{med_post.author}}<span class="mx-2">&bullet;</span>{{med_post.published}}<span class="mx-2">&bullet;</span></div>
+            <p><a href="{{ med_post.links.0.href }}" target="_blank" >Continue Reading...</a></p>
+          </div> 
+        </div>
+      
+       
+    {% endfor %}
+
         </div>
       </div>
     </section>
     {% endif %}
+    
 
 {% if page.show_contact_form  %}
     <section class="site-section bg-light" id="{{page.contact_title|cut:" "}}">
@@ -2268,8 +2294,7 @@ h1, h2, h3, h4, h5,
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
       </p>
             </div>
-          </div>
-          
+          </div>          
         </div>
       </div>
     </footer>
@@ -2290,7 +2315,26 @@ h1, h2, h3, h4, h5,
   <script src="{% static 'js/jquery.fancybox.min.js'%}"></script>
   <script src="{% static 'js/jquery.sticky.js'%}"></script>  
   <script src="{% static 'js/main.js'%}"></script>    
-  </body>
+  
+<script>
+$(document).ready(function(){
+  $(".medium-blog-summary").each(function() {  
+       var targetId = $(this).attr("id");
+       $("#" + targetId + " img").each(function() {
+         var source = this.src;
+         try{
+         if(source.includes("cdn-images")){
+          $("#medium_img_"+targetId).attr("src",source);
+        }
+      }catch{
+        console.warn("could not update " + targetId + " image with image from medium site")
+      }
+    });   
+  });    
+});
+</script>
+
+</body>
 </html>
 {% endblock %}
 
@@ -2300,5 +2344,8 @@ h1, h2, h3, h4, h5,
 }
 iframe {
   height: 90vh;
+}
+.medium-blog-summary {
+  display:none;
 }
 </style>
