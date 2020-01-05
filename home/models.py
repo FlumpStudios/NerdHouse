@@ -281,9 +281,10 @@ class HomePage(Page):
     primary_colour = models.CharField(max_length=50, default="#f37e77")
     secondary_colour = models.CharField(max_length=50, default="#ffffff")
     
-    blog_title = models.CharField(max_length=50, default="Blogs", blank=True)
-    
+    blog_title = models.CharField(max_length=50, default="Blogs", blank=True)    
     medium_username = models.CharField(max_length=50, null=True, blank=True)
+    medium_blog_display_limit = models.IntegerField(blank=True, default=6)
+    
 
     intro_background = models.ForeignKey(
         'wagtailimages.Image',
@@ -431,9 +432,9 @@ class HomePage(Page):
     content_panels += [
         MultiFieldPanel(
             [
-                FieldPanel('blog_title'),                
-                
-                FieldPanel('medium_username')            
+                FieldPanel('blog_title'),                                
+                FieldPanel('medium_username'),   
+                FieldPanel('medium_blog_display_limit')
             ],
             heading="Blog",  
         ),
