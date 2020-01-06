@@ -231,6 +231,8 @@ class HomePage(Page):
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")    
     intro_text = RichTextField(blank=True)
     intro_continue_button_text = models.CharField(max_length=50, default='Continue', blank=True)    
+    intro_youtube_id = models.CharField(max_length=50, blank=True, default="")
+    video_background_brightness = models.DecimalField(default=1, max_digits=3, decimal_places=2)
     
     client_firstname = models.CharField(max_length=50, default="Joe", blank=True)    
     client_surname = models.CharField(max_length=50, default="Blogs", blank=True)    
@@ -350,7 +352,9 @@ class HomePage(Page):
                 FieldPanel('intro_header'),
                 FieldPanel('intro_text'),
                 FieldPanel('intro_continue_button_text'),
-                ImageChooserPanel('intro_background')
+                ImageChooserPanel('intro_background'),
+                FieldPanel('intro_youtube_id'),
+                FieldPanel('video_background_brightness')
             ],
             heading="Introduction",  
         ),
