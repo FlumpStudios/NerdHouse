@@ -222,9 +222,11 @@ class HomePage(Page):
         blog_index_page = BlogIndexPage.objects.first()
         blog_pages = BlogPage.objects.child_of(blog_index_page) if blog_index_page else []
         medium_blogs = feedparser.parse(str("https://medium.com/feed/" + self.medium_username) if self.medium_username else "" )
+        videoFormatIsVimeo = str(self.intro_youtube_id).isdigit()
         context['blogpages'] = blog_pages
         context['medium_blogs'] = medium_blogs.entries[:self.medium_blog_display_limit]
         context['has_address'] = self.has_address()
+        context['videoFormatIsVimeo'] = videoFormatIsVimeo
         return context      
 
     #DATABASE FIELDS

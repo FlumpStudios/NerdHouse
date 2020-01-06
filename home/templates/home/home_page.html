@@ -1895,8 +1895,13 @@ h1, h2, h3, h4, h5,
     </header>
     {% if page.intro_youtube_id %}
     <div class="videoWrapper">
-      <iframe class="trailer" style="opacity: {{page.video_background_brightness}};" src="https://www.youtube.com/embed/{{page.intro_youtube_id}}?rel=0&amp;controls=0&amp;showinfo=0&amp;mute=1&amp;autoplay=1&amp;loop=1&amp;playlist={{page.intro_youtube_id}}" allowfullscreen="" width="560" height="349" frameborder="0"></iframe>
-    </div>
+    
+      {% if videoFormatIsVimeo %}
+       <iframe style="opacity: {{page.video_background_brightness}};" src="//player.vimeo.com/video/{{page.intro_youtube_id}}?api=1&background=1&title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"  frameborder="0" allowfullscreen=""></iframe>
+      {% else %}
+          <iframe class="trailer" style="opacity: {{page.video_background_brightness}};" src="https://www.youtube.com/embed/{{page.intro_youtube_id}}?rel=0&amp;controls=0&amp;showinfo=0&amp;mute=1&amp;autoplay=1&amp;loop=1&amp;playlist={{page.intro_youtube_id}}" allowfullscreen="" width="560" height="349" frameborder="0"></iframe>
+      {% endif %}
+      </div>    
     {% endif %}
   
       {% image page.intro_background original as img %}
