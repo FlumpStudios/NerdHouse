@@ -222,7 +222,7 @@ class HomePage(Page):
         blog_index_page = BlogIndexPage.objects.first()
         blog_pages = BlogPage.objects.child_of(blog_index_page) if blog_index_page else []
         medium_blogs = feedparser.parse(str("https://medium.com/feed/" + self.medium_username) if self.medium_username else "" )
-        videoFormatIsVimeo = str(self.intro_youtube_id).isdigit()
+        videoFormatIsVimeo = str(self.intro_video_id).isdigit()
         context['blogpages'] = blog_pages
         context['medium_blogs'] = medium_blogs.entries[:self.medium_blog_display_limit]
         context['has_address'] = self.has_address()
@@ -233,7 +233,7 @@ class HomePage(Page):
     intro_header = models.CharField(max_length=50,default="Welcome to our website!")    
     intro_text = RichTextField(blank=True)
     intro_continue_button_text = models.CharField(max_length=50, default='Continue', blank=True)    
-    intro_youtube_id = models.CharField(max_length=50, blank=True, default="")
+    intro_video_id = models.CharField(max_length=50, blank=True, default="")
     video_background_brightness = models.DecimalField(default=1, max_digits=3, decimal_places=2)
     
     client_firstname = models.CharField(max_length=50, default="Joe", blank=True)    
@@ -355,7 +355,7 @@ class HomePage(Page):
                 FieldPanel('intro_text'),
                 FieldPanel('intro_continue_button_text'),
                 ImageChooserPanel('intro_background'),
-                FieldPanel('intro_youtube_id'),
+                FieldPanel('intro_video_id'),
                 FieldPanel('video_background_brightness')
             ],
             heading="Introduction",  

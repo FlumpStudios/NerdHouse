@@ -1893,19 +1893,19 @@ h1, h2, h3, h4, h5,
         </div>
       </div>      
     </header>
-    {% if page.intro_youtube_id %}
+    {% if page.intro_video_id %}
     <div class="videoWrapper">
     
       {% if videoFormatIsVimeo %}
-       <iframe style="opacity: {{page.video_background_brightness}};" src="//player.vimeo.com/video/{{page.intro_youtube_id}}?api=1&background=1&title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"  frameborder="0" allowfullscreen=""></iframe>
+       <iframe style="opacity: {{page.video_background_brightness}};" src="//player.vimeo.com/video/{{page.intro_video_id}}?api=1&background=1&title=0&amp;portrait=0&amp;byline=0&amp;autoplay=1&amp;loop=1"  frameborder="0" allowfullscreen=""></iframe>
       {% else %}
-          <iframe class="trailer" style="opacity: {{page.video_background_brightness}};" src="https://www.youtube.com/embed/{{page.intro_youtube_id}}?rel=0&amp;controls=0&amp;showinfo=0&amp;mute=1&amp;autoplay=1&amp;loop=1&amp;playlist={{page.intro_youtube_id}}" allowfullscreen="" width="560" height="349" frameborder="0"></iframe>
+          <iframe class="trailer" style="opacity: {{page.video_background_brightness}};" src="https://www.youtube.com/embed/{{page.intro_video_id}}?rel=0&amp;controls=0&amp;showinfo=0&amp;mute=1&amp;autoplay=1&amp;loop=1&amp;playlist={{page.intro_video_id}}" allowfullscreen="" width="560" height="349" frameborder="0"></iframe>
       {% endif %}
       </div>    
     {% endif %}
   
       {% image page.intro_background original as img %}
-  <div class="site-blocks-cover overlay" {% if not page.intro_youtube_id %} style="background-image: url({{img.url}});" {% endif %} data-aos="fade" id="home-section">
+  <div class="site-blocks-cover overlay" {% if not page.intro_video_id %} style="background-image: url({{img.url}});" {% endif %} data-aos="fade" id="home-section">
       <div class="container">
         <div class="row align-items-center justify-content-center">          
               <div class="col-md-6 mt-lg-5 text-center">
@@ -2085,7 +2085,7 @@ h1, h2, h3, h4, h5,
         {% with post=post.specific %}        
           <div class="col-md-6 col-lg-4 mb-4 mb-lg-4">
             <div class="h-entry">
-                <a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >
+                <a href="{% pageurl post %}" target="_blank" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >
                   {% with post.main_image as main_image %}
                   {% if main_image %}
                     {% image main_image fill-320x200-c100 %}
@@ -2094,10 +2094,10 @@ h1, h2, h3, h4, h5,
                   {% endif %}
                   {% endwith %}
               </a>
-              <h2 class="font-size-regular"><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >{{post.title}}</a></h2>
+              <h2 class="font-size-regular"><a href="{% pageurl post %}" target="_blank" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >{{post.title}}</a></h2>
               <div class="meta mb-4">{{post.author}}<span class="mx-2">&bullet;</span>{{post.date}}<span class="mx-2">&bullet;</span></div>
               
-              <p><a href="#" data-toggle="modal" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >Continue Reading...</a></p>
+              <p><a href="{% pageurl post %}" target="_blank" data-target=".bd-example-modal-lg-{{ forloop.counter }}" >Continue Reading...</a></p>
             </div> 
           </div>
         {% endwith %}        

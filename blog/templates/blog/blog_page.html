@@ -1,10 +1,6 @@
-{% extends "home/home_page.html" %}
+{% load blogapp_tags %}
 {% load static %}
-
 {% load wagtailcore_tags wagtailimages_tags %}
-
-{% block body_class %}template-blogpage{% endblock %}
-
 {% block content %}
 <html>
 <head>
@@ -69,4 +65,5 @@
   <script src="{% static 'js/main.js'%}"></script>    
 </body>
 </html>
+{% show_comments %}
 {% endblock %}
