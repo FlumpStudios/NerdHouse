@@ -24,4 +24,4 @@ RUN chown -R wagtail /code
 USER wagtail
 
 EXPOSE 80
-CMD exec gunicorn PlinxPlanner.wsgi:application --bind 0.0.0.0:80 --workers 3
+CMD exec gunicorn PlinxPlanner.wsgi:application --authbind 0.0.0.0:80 --workers 3
