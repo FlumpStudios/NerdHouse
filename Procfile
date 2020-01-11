@@ -1,0 +1,1 @@
+web: gunicorn PlinxPlanner.wsgi --log-file -
