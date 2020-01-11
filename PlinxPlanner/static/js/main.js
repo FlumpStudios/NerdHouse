@@ -231,10 +231,12 @@ jQuery(document).ready(function($) {
 	};
 	siteDatePicker();
 
-	var siteSticky = function() {
-		$(".js-sticky-header").sticky({topSpacing:0});
-	};
+	if (window.innerWidth > 768){
+		var siteSticky = function() {
+			$(".js-sticky-header").sticky({topSpacing:0});
+		};
 	siteSticky();
+	}
 
 	// navigation
   var OnePageNavigation = function() {
@@ -254,23 +256,19 @@ jQuery(document).ready(function($) {
   };
   OnePageNavigation();
 
-  var siteScroll = function() {
 
-  	
+//   if (window.innerWidth > 768){
+//   var siteScroll = function() {
+//   	$(window).scroll(function() {
+//   		var st = $(this).scrollTop();
 
-  	$(window).scroll(function() {
-
-  		var st = $(this).scrollTop();
-
-  		if (st > 100) {
-  			$('.js-sticky-header').addClass('shrink');
-  		} else {
-  			$('.js-sticky-header').removeClass('shrink');
-  		}
-
-  	}) 
-
-  };
-  siteScroll();
-
+//   		if (st > 100) {
+//   			$('.js-sticky-header').addClass('shrink');
+//   		} else {
+//   			$('.js-sticky-header').removeClass('shrink');
+//   		}
+//   	})
+//   };
+//   siteScroll();
+// }
 });
