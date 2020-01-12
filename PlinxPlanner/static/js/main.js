@@ -257,18 +257,20 @@ jQuery(document).ready(function($) {
   OnePageNavigation();
 
 
-//   if (window.innerWidth > 768){
-//   var siteScroll = function() {
-//   	$(window).scroll(function() {
-//   		var st = $(this).scrollTop();
+  
+  if (window.innerWidth > 768){
+  var siteScroll = function() {
+  	$(window).scroll(function() {
+  		var st = $(this).scrollTop();
 
-//   		if (st > 100) {
-//   			$('.js-sticky-header').addClass('shrink');
-//   		} else {
-//   			$('.js-sticky-header').removeClass('shrink');
-//   		}
-//   	})
-//   };
-//   siteScroll();
-// }
+  		if (st > 100) {
+  			$('.js-sticky-header').addClass('shrink');
+  		} else {
+  			$('.js-sticky-header').removeClass('shrink');
+  		}
+  	})
+  };
+  siteScroll();
+}
+
 });
