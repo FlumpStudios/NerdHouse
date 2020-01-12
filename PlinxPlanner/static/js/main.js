@@ -256,6 +256,7 @@ jQuery(document).ready(function($) {
   };
   OnePageNavigation();
 
+
   
   if (window.innerWidth > 768){
   var siteScroll = function() {
@@ -271,4 +272,5 @@ jQuery(document).ready(function($) {
   };
   siteScroll();
 }
+
 });
