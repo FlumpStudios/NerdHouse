@@ -211,7 +211,7 @@ class testimonialItem(models.Model):
         return self.author
 
 class HomePage(Page):
-    subpage_types = ['blog.BlogIndexPage']
+    subpage_types = ['blog.BlogIndexPage', 'contact.FormPage']
 
     def has_address(self):
         return self.client_organisationName or self.client_addressLine1 or self.client_addressLine2 or self.client_town or self.client_county or self.client_postcode
