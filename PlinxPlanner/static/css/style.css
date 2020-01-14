@@ -1818,3 +1818,11 @@ height: 100vh;
 height: 200px;
 width: 320px;
 }
+
+.contact-form{
+  width:100%;
+}
+
+.helptext{
+  font-style: italic;
+}
