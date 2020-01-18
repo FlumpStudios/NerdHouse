@@ -3,7 +3,7 @@ from .base import *
 import os
 
 env = os.environ.copy()
-SECRET_KEY = '8nz9a66@rxt%^0htjm@smt8z1x!y964u$b@!8mjb8=$ubib2a+'
+SECRET_KEY = '#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False

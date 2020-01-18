@@ -165,7 +165,7 @@ BASE_URL = 'http://nerdhouse.co.uk'
 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'Plinx'
-EMAIL_HOST_PASSWORD = 'Benesoz_1981'
+EMAIL_HOST_USER = 'x'
+EMAIL_HOST_PASSWORD = 'x'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
