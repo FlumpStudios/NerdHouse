@@ -3,7 +3,7 @@ from .base import *
 import os
 
 env = os.environ.copy()
-SECRET_KEY = env['SECRET_KEY']
+SECRET_KEY = '#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -13,8 +13,6 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # SECURITY WARNING: define the correct hosts in production!
 ALLOWED_HOSTS = ['*'] 
-
-
 
 
 
