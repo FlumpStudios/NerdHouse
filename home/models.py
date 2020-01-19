@@ -1,11 +1,12 @@
 from django.db import models
 import os
 import sys
-from modelcluster.fields import ParentalKey
+from django_ace import AceWidget
 
+from modelcluster.fields import ParentalKey
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import RichTextField
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel,FieldRowPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, InlinePanel,FieldRowPanel, ObjectList,TabbedInterface
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
@@ -13,6 +14,7 @@ from wagtail.search import index
 from modelcluster.fields import ParentalKey
 from blog.models import BlogIndexPage 
 from blog.models import BlogPage 
+from colorfield.fields import ColorField
 import feedparser
 
 
@@ -284,12 +286,17 @@ class HomePage(Page):
     footer_info_title = models.CharField(max_length=50, default="About", blank=True) 
     footer_info = RichTextField(blank=True)   
 
-    primary_colour = models.CharField(max_length=50, default="#f37e77")
-    secondary_colour = models.CharField(max_length=50, default="#ffffff")
+    primary_colour = ColorField(default="#f37e77")
+    #secondary_colour = models.CharField(max_length=50, default="#ffffff")
     
     blog_title = models.CharField(max_length=50, default="Blogs", blank=True)    
     medium_username = models.CharField(max_length=50, null=True, blank=True)
     medium_blog_display_limit = models.IntegerField(blank=True, default=6)
+
+    #DEVELOPER SECTION
+    custom_javacript = models.TextField(blank=True)
+    custom_css = models.TextField( blank=True)
+    custom_html = models.TextField(blank=True)
     
 
     intro_background = models.ForeignKey(
@@ -467,12 +474,32 @@ class HomePage(Page):
                 FieldPanel('footer_info')
             ],
             heading="Footer",  
+        ),    
+    ]
+
+    developer_panels = [
+        MultiFieldPanel(
+            [
+                FieldPanel('custom_javacript'),
+                FieldPanel('custom_css'),
+                FieldPanel('custom_html')
+                                
+            ],
+            heading="Developer Settings",
         ),
-    ]   
+    ]
 
     # promote_panels = [
     #     MultiFieldPanel(Page.promote_panels, "Common page configuration"),
     #     ImageChooserPanel('intro_background'),
     #     ]  
 
-
+    edit_handler = TabbedInterface(
+        [
+            ObjectList(content_panels, heading='Content'),
+            # This is our custom banner_panels. It's just a list, how easy!
+            ObjectList(developer_panels, heading="Developer Tools"),
+            ObjectList(Page.promote_panels, heading='Promotional'),
+            ObjectList(Page.settings_panels, heading='Settings'),
+        ]
+    )
