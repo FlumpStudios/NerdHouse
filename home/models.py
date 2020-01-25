@@ -1,7 +1,6 @@
 from django.db import models
 import os
 import sys
-from django_ace import AceWidget
 
 from modelcluster.fields import ParentalKey
 from wagtail.core.models import Page, Orderable

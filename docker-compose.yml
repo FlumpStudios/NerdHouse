@@ -7,4 +7,8 @@ services:
       - ./:/code      
      ports: 
       - 8000:8000
+     environment:
+      - SENDGRIDPASSWORD="Benesoz_1981"
+      - NERDHOUSESECRET="(b7\!&wsi2+*a%w3ccx=oa9-01\!9jae^bbogq^-\!k@6d\!8s44ck"
+
 
