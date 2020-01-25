@@ -2,8 +2,7 @@ from __future__ import absolute_import, unicode_literals
 from .base import *
 import os
 
-env = os.environ.copy()
-SECRET_KEY = '#'
+SECRET_KEY = os.environ['NERDHOUSESECRET']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False

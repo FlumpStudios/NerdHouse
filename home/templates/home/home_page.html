@@ -4,6 +4,10 @@
 {% load wagtailcore_tags %}
 
 <style>
+    {% autoescape off %}
+    {{page.custom_css}}
+    {% endautoescape %}
+  
 /* Base */
 @media only screen and (max-width: 768px) {
   .site-navbar{
@@ -577,7 +581,10 @@
       </div>
     </section>
  {% endif %}
-    
+ {% autoescape off %}
+  {{page.custom_html|richtext}}
+  {% endautoescape %}
+  
     <footer class="site-footer">
       <div class="container">
         <div class="row">
@@ -643,8 +650,7 @@
           </div>          
         </div>
       </div>
-    </footer>
-
+    </footer>   
   </div> <!-- .site-wrap -->
 
   <script src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
@@ -664,6 +670,10 @@
   
 <script>
 $(document).ready(function(){
+  {% autoescape off %}
+  {{page.custom_javacript}}
+{% endautoescape %}
+  
   $(".medium-blog-summary").each(function() {  
        var targetId = $(this).attr("id");
        $("#" + targetId + " img").each(function() {
@@ -678,6 +688,8 @@ $(document).ready(function(){
     });   
   });    
 });
+
+
 </script>
 
 </body>

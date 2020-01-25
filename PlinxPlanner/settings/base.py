@@ -39,10 +39,9 @@ INSTALLED_APPS = [
     'wagtail.search',
     'wagtail.admin',
     'wagtail.core',
-
+    'colorfield',
     'modelcluster',
     'taggit',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -165,7 +164,7 @@ BASE_URL = 'http://nerdhouse.co.uk'
 
 
 EMAIL_HOST = 'smtp.sendgrid.net'
-EMAIL_HOST_USER = 'x'
-EMAIL_HOST_PASSWORD = 'x'
+EMAIL_HOST_USER = 'Plinx'
+EMAIL_HOST_PASSWORD = os.environ.get('SENDGRIDPASSWORD')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
