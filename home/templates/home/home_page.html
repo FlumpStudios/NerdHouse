@@ -580,10 +580,11 @@
       </div>
     </section>
  {% endif %}
+ {% if page.custom_html %}
  {% autoescape off %}
   {{page.custom_html|richtext}}
-  {% endautoescape %}
-  
+ {% endautoescape %}
+ {% endif %} 
     <footer class="site-footer">
       <div class="container">
         <div class="row">
@@ -646,7 +647,7 @@
         Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
       </p>
-      <p>Updated and modified by <a href="www.plinx-tech.co.uk" target="_blank" >Plinx</a></p>
+      <p>Updated and modified by <a href="www.plinx-tech.co.uk" target="_blank" >Plinx</a> -v0.98</p>
             </div>
           </div>          
         </div>
